@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/DeltaBackdrop.tsx","./src/components/GithubSection.tsx","./src/components/Hero.tsx","./src/components/ProjectCard.tsx","./src/components/StatusBadge.tsx","./src/data/constants.ts","./src/data/projects.ts","./src/hooks/useGithub.ts","./env.d.ts"],"version":"5.9.3"}
