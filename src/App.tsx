@@ -13,7 +13,6 @@ export default function App() {
   // NEW: mobile menu state
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // NEW: close on Escape and lock body scroll when menu is open
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMenuOpen(false)
@@ -166,7 +165,30 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16">
+        <section
+          id="about"
+          className="relative flex flex-col items-center justify-center mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 text-center"
+        >
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
+              About the Project
+            </h2>
+            <p className="text-zinc-300 leading-relaxed">
+              The VANT∆ Project is a unified space for experiments in full-stack web development,
+              networking, and web utilities. I’m at the beginning of my
+              full-stack development journey, building on a foundation in networking,
+              security, and systems design. The VANT∆ Project is my living portfolio, a
+              space to explore how the principles of infrastructure translate into the
+              creative side of the web. My goal is to grow from what I already know about systems
+              into crafting the systems themselves and turning years of technical
+              groundwork into a new layer of development and design.
+            </p>
+          </div>
+        </section>
+
+
+
+        {/* <section id="about" className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 text-center">
           <div className="grid md:grid-cols-3 gap-10 items-start">
             <div className="md:col-span-2">
               <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">About the Project</h2>
@@ -187,11 +209,11 @@ export default function App() {
                 <li>• React + TypeScript + Tailwind</li>
                 <li>• Lightweight animations via Framer Motion</li>
                 <li>• JSON-driven projects data; future: GitHub API</li>
-                {/* <li>• Accessibility and PWA on the roadmap</li> */}
+                <li>• Accessibility and PWA on the roadmap</li>
               </ul>
             </div>
           </div>
-        </section>
+        </section>*/}
 
         <section id="contact" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="rounded-2xl border border-white/10 p-8 bg-white/[0.03]">
@@ -201,18 +223,28 @@ export default function App() {
                 <p className="mt-2 text-zinc-400">Have an idea, a suggestion, or a feature request? Ping me.</p>
               </div>
               <div className="flex items-center gap-3">
-                <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
+                <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   Email
                 </a>
-                <a href="https://github.com/v4nt4vo1d" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
+                <a href="https://github.com/v4nt4vo1d" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   GitHub
                 </a>
                 <a
                   href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   LinkedIn
                 </a>
+                <a
+                href={`${import.meta.env.BASE_URL}resume.html`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
+              >
+                Résumé
+              </a>
+
               </div>
             </div>
           </div>

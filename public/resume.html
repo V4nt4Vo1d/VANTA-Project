@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VANT∆ · Résumé</title>
+  <style>
+    :root{
+      --bg:#0a0a0f; --ink:#e9e9ef; --muted:#a3a3ad;
+      --line:#23232b; --card:#101118;
+      --accent:#00ffff; --accent2:#ff00e6;
+    }
+    /* Screen */
+    html,body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.55 system-ui,Segoe UI,Inter,Arial,sans-serif}
+    .wrap{max-width:900px;margin:48px auto;padding:0 20px}
+    .card{background:linear-gradient(180deg,var(--card),transparent);border:1px solid var(--line);border-radius:18px;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    h1{font-size:28px;letter-spacing:.3px;margin:0}
+    h2{font-size:18px;margin:24px 0 10px}
+    .muted{color:var(--muted)}
+    .rail{display:flex;gap:16px;flex-wrap:wrap}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.9}
+    hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+    .tag{display:inline-block;border:1px solid #2c2c35;border-radius:999px;padding:.2rem .6rem;margin:.25rem .35rem 0 0;font-size:12px;color:#cfd0d7;background:#0e0f16}
+    .row{display:grid;grid-template-columns:1fr 2fr;gap:20px}
+    .row > div{min-width:0}
+    ul{margin:8px 0 0 18px}
+    li + li{margin-top:8px}
+    @media (max-width:800px){.row{grid-template-columns:1fr}}
+    /* Print */
+    @media print{
+      body{background:#fff;color:#111}
+      .card{background:#fff;border:0;padding:0}
+      a{color:#000;text-decoration:none}
+      .tag{border-color:#ddd;background:#f6f6f6;color:#000}
+      .wrap{margin:0;max-width:100%;padding:0}
+      .no-print{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+        
+          <h1>VANTA <span style="color:var(--accent2)">·</span> Full-Stack Developer (in progress)</h1>
+          <div class="muted">Networking/Security foundations</div>
+        </div>
+        <div class="rail">
+          <a href="https://github.com/v4nt4vo1d" target="_blank" rel="noopener noreferrer">Github</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </header>
+
+      <hr/>
+
+      <section>
+        <h2>Summary</h2>
+        <p>
+          Early-career full-stack developer with a background in networking, security, and help desk.
+          The VANT∆ Project is a living portfolio—shipping small, learning fast, and documenting the climb
+          from infrastructure fundamentals to production-ready software.
+        </p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>Network Security Engineer</strong> — Firewalls.com, Inc. · Indianapolis, IN
+            <em>(Jan 2025 – Aug 2025)</em><br/>
+            Configured and managed customer firewalls (SonicWall/Sophos). Implemented and troubleshot VPN/IPsec,
+            security policies, and HA; supported SMB environments and reliability needs.
+          </li>
+          <li>
+            <strong>Service Desk Analyst</strong> — Insight Global (Techforce for Salesforce) · Indianapolis, IN
+            <em>(Apr 2022 – Oct 2022)</em><br/>
+            Resolved endpoint issues across Windows/macOS/iOS; handled AD accounts (resets, group changes),
+            SSO/VPN (Cisco AnyConnect) troubleshooting, and general user support at scale.
+          </li>
+        </ul>
+      </section>
+
+      <section class="row">
+        <div>
+          <h2>Core Skills</h2>
+          <div>
+            <span class="tag">Networking</span><span class="tag">Firewalls (SonicWall/Sophos)</span>
+            <span class="tag">IPsec / VPN</span><span class="tag">Routing</span><span class="tag">DNS</span>
+            <span class="tag">SSH</span><span class="tag">Incident Response</span><span class="tag">Active Directory</span>
+            <span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">macOS</span><span class="tag">iOS</span><span class="tag">Android</span></span><span class="tag">Lighting</span><span class ="tag">Audio</span>
+          </div>
+        </div>
+        <div>
+          <h2>Web & Tooling</h2>
+          <div>
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Flexbox</span>
+            <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span>
+            <span class="tag">Git Version Control</span><span class="tag">Github Pages</span><span class="tag">Node.js</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Projects</h2>
+        <ul>
+          <li><strong>The VANT∆ Project</strong> — personal portfolio web app (React + TypeScript + Tailwind); automated deploys to GitHub Pages.</li>
+          <li><strong>TACNET · Stanton</strong> — tactical map concepts; UI/UX prototypes for game-adjacent tools, API integration, login functionality, and more.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Certifications</h2>
+        <ul>
+          <li>CompTIA Security+</li>
+          <li>CompTIA Network+</li>
+        </ul>
+      </section>
+
+      <hr/>
+
+      <section>
+        <h2>Links</h2>
+        <div class="rail">
+          <a href="https://vantaproject.space" target="_blank" rel="noopener noreferrer">Portfolio</a>
+          <a href="https://github.com/v4nt4vo1d" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <!-- <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer">LinkedIn</a> -->
+        </div>
+      </section>
+
+      <div class="no-print" style="margin-top:18px">
+        <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
