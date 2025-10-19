@@ -236,10 +236,9 @@ export default function App() {
                 >
                   LinkedIn
                 </a>
+                <br />
                 <a
                 href={`${import.meta.env.BASE_URL}resume.html`}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
               >
                 Résumé
