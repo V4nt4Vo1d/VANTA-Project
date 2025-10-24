@@ -4,13 +4,15 @@ import { Hero } from './components/Hero'
 import { ProjectCard } from './components/ProjectCard'
 import { CATEGORIES, NAV, LOGO_SRC, type Category } from './data/constants'
 import { PROJECTS } from './data/projects'
+import DiscordStatus from "./components/DiscordStatus";
+
 
 export default function App() {
-  // existing state
+
   const [category, setCategory] = useState<Category>('All')
   const [query, setQuery] = useState('')
 
-  // NEW: mobile menu state
+  
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function App() {
   )
 
   return (
-    <div className="min-h-screen text-zinc-200 bg-[#0a0a0f]">
+    <div className="min-h-screen text-zinc-200 bg-[#0a0a0f] overflow-x-clip">
       <DeltaBackdrop />
 
       {/* HEADER with mobile menu */}
@@ -95,8 +97,6 @@ export default function App() {
             </button>
           </div>
         </nav>
-
-        {/* Mobile slide-down panel */}
         <div
           id="mobile-menu"
           className={`sm:hidden overflow-hidden transition-[max-height] duration-300 ${menuOpen ? 'max-h-96' : 'max-h-0'}`}
@@ -222,7 +222,7 @@ export default function App() {
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Let’s collaborate</h2>
                 <p className="mt-2 text-zinc-400">Have an idea, a suggestion, or a feature request? Ping me.</p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3 [overflow-wrap:anywhere]">
                 <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   Email
                 </a>
@@ -232,18 +232,17 @@ export default function App() {
                 <a
                   href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
-                  target="_blank" rel="noopener noreferrer"
-                >
+                  target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
-                <br />
                 <a
                 href={`${import.meta.env.BASE_URL}resume.html`}
-                className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
-              >
+                className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
                 Résumé
               </a>
-
+              </div>
+              <div className="mt-6 w-full max-w-sm">
+                <DiscordStatus discordId="347416011928240128" />
               </div>
             </div>
           </div>
