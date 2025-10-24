@@ -219,8 +219,8 @@ export default function App() {
           <div className="rounded-2xl border border-white/10 p-8 bg-white/[0.03]">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Let’s collaborate</h2>
-                <p className="mt-2 text-zinc-400">Have an idea, a suggestion, or a feature request? Ping me.</p>
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Here are some links!</h2>
+                <p className="mt-2 text-zinc-400">If you have any questions or want to connect, feel free to reach out.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 [overflow-wrap:anywhere]">
                 <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
@@ -230,7 +230,7 @@ export default function App() {
                   GitHub
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
+                  href="https://www.linkedin.com/in/jacob-r-2228a8206/"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
                   target="_blank" rel="noopener noreferrer">
                   LinkedIn
@@ -250,7 +250,7 @@ export default function App() {
       </main>
 
       <footer className="py-10 text-center text-xs text-zinc-500">
-        <p>© {new Date().getFullYear()} THE VANT∆ PROJECT · Built with curiosity, caffeine, and mistakes.</p>
+        <p>© {new Date().getFullYear()} THE VANT∆ PROJECT</p>
       </footer>
     </div>
   )
