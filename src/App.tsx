@@ -72,7 +72,7 @@ export default function App() {
               GitHub
             </a>
             <a
-              href={`${import.meta.env.BASE_URL}under-construction.html`}
+              href="under-construction.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               New Stuff!!
