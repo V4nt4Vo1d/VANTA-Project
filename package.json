@@ -21,6 +21,22 @@
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.4.5",
-    "vite": "^7.1.10"
+    "vite": "^7.1.12"
+  },
+  "description": "This repository contains my custom **About Me webpage**, designed and developed as part of my ongoing journey through [The Odin Project](https://www.theodinproject.com) and my broader learning in web development.",
+  "main": "postcss.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V4nt4Vo1d/VANTA-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/V4nt4Vo1d/VANTA-Project/issues"
+  },
+    "homepage": "https://github.com/V4nt4Vo1d/VANTA-Project#readme"
   }
-}
