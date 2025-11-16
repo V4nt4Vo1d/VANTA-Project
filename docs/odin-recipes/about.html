@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="About page for the Odin Recipe Website, created as part of The Odin Project Foundations curriculum." />
+  <title>About — Odin Recipes</title>
+  <!-- Internal CSS -->
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --brand: #111827;
+      --accent: #2563eb;
+      --ring: rgba(37, 99, 235, 0.25);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg); color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.02em; }
+    .logo {
+      display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: radial-gradient(120% 120% at 30% 20%, #60a5fa, #4f46e5 55%, #111827);
+      color: white; font-weight: 900; font-size: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+    nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    nav a { padding: 8px 12px; border-radius: 10px; }
+    nav a[aria-current="page"] { background: #e5e7eb; color: #111827; text-decoration: none; }
+
+    main {
+      margin-top: 12px;
+      display: grid; gap: 20px;
+    }
+    .card {
+      background: var(--card); border: 1px solid #e5e7eb; border-radius: var(--radius);
+      padding: 24px; box-shadow: 0 8px 30px rgba(2, 6, 23, 0.05);
+    }
+    h1 { font-size: clamp(1.6rem, 2.2vw + 1rem, 2.4rem); line-height: 1.2; margin: 4px 0 12px; }
+    h2 { font-size: 1.25rem; margin: 0 0 8px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    ul { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+
+    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: 1.1fr .9fr; }
+    }
+
+    .note { font-size: .95rem; background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 12px 14px; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: #111827; color: #e5e7eb; border-radius: 6px; padding: 0.15em 0.45em; font-size: .9em; }
+    footer { margin: 28px 0 16px; color: #64748b; font-size: .95rem; }
+    .skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip:focus { position: static; width: auto; height: auto; padding: 8px 12px; background: #fff; border: 2px solid var(--accent); border-radius: 12px; box-shadow: 0 0 0 4px var(--ring); }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #eef2ff; color: #3730a3; font-weight: 600; font-size: .85rem; }
+    .list-tight li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="Site brand">
+        <div class="logo" aria-hidden="true">∆</div>
+        <div>
+          <div style="font-size:1.1rem;color:var(--brand)">Odin Recipes</div>
+          <div style="font-size:.9rem;color:var(--muted);font-weight:500">An Odin Project • Foundations</div>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="https://vantaproject.space" target="_blank" rel="noopener noreferrer">Vanta Project</a>
+      </nav>
+    </header>
+
+    <main id="content" tabindex="-1">
+      <section class="card">
+        <h1>About This Project</h1>
+        <p>
+          This website is a small, focused project built as part of <strong><a href="https://www.theodinproject.com/paths/foundations/courses/foundations" target="_blank" rel="noreferrer noopener">The Odin Project — Foundations</a></strong>. 
+          The goal is to practice clean, <strong>HTML</strong>, light <strong>CSS</strong>, accessible content, and a tidy project structure while using <strong>Git/GitHub</strong> for version control.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Scope & Objectives</h2>
+          <ul class="list-tight">
+            <li>Build a minimal multi‑page site: a homepage plus individual recipe pages.</li>
+            <li>Use semantic elements (<span class="kbd">&lt;header&gt;</span>, <span class="kbd">&lt;main&gt;</span>, <span class="kbd">&lt;article&gt;</span>, <span class="kbd">&lt;nav&gt;</span>, <span class="kbd">&lt;footer&gt;</span>) for structure.</li>
+            <li>Demonstrate ordered and unordered lists for ingredients and steps, and include appropriately described images.</li>
+            <li>Keep styles simple and readable without any frameworks.</li>
+          </ul>
+        </article>
+
+        <aside class="card" aria-labelledby="tech-stack">
+          <h2 id="tech-stack">Tech Stack</h2>
+          <ul class="list-tight">
+            <li>HTML for structure</li>
+            <li>CSS for basic styling and layout</li>
+            <li>Git & GitHub for source control</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Project Structure</h2>
+          <pre class="note" aria-label="Example folder structure"><code>odin-recipes/
+├─ index.html         # Homepage
+├─ about.html         # This page (with inline CSS)
+├─ recipes/           # Individual recipe pages
+│  ├─ cookie.html
+│  └─ brownie.html
+│  └─ cupcake.html  # (Cinnamon Rolls) 
+└─ images/            # Recipe images
+</code></pre>
+        </article>
+
+        <aside class="card" aria-labelledby="accessibility">
+          <h2 id="accessibility">Accessibility Notes</h2>
+          <ul class="list-tight">
+            <li>Informative <strong>alt</strong> text for images.</li>
+            <li>Headings arranged in a logical outline (H1 → H2 → H3...).</li>
+            <li>Clear link text and visible focus styles.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="card">
+        <h2>Credits & License</h2>
+        <p>
+          Content and code created by <strong>VANT∆</strong> for learning purposes. If you reuse anything here, please provide attribution. Images are either self‑made or from free sources credited on the relevant recipe pages.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Contact & Links</h2>
+        <ul class="list-tight">
+          <li>Repository: <a href="https://github.com/V4nt4Vo1d/odin-recipes.git" target="_blank" rel="noreferrer noopener" aria-label="Project repository link">Odin Recipes GitHub Repository</a></li>
+          <li>Email: <a href="mailto:v4ant4vo1d@gmail.com">v4ant4vo1d@gmail.com</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <span class="badge" aria-label="Project badge">VANT∆ Project</span>
+      <span aria-hidden="true">•</span>
+      <span>Foundations — Recipes</span>
+    </footer>
+  </div>
+</body>
+</html>

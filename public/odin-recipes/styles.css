@@ -1,0 +1,101 @@
+/* styles.css */
+:root {
+    --bg: #0df7ff;
+}
+body { 
+    background-color: var(--bg);
+    margin: 20px;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+h4 {
+    text-align: center;
+    color: #555;
+}
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    align-items: center;
+}
+/* .nav-buttons {
+    color: #4CAF50;
+    padding: 10px 5px;
+    margin: 0px;
+    border: dotted 10px #b700ff;
+    border-radius: 0px;
+    cursor: pointer;
+    text-align: center;
+} */
+
+.nav-buttons {
+    color: #4CAF50;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.header .odin-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.setup {
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#instructions.setup {
+    text-align: left;
+}
+
+.recipe-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(245, 11, 194, 0.199);
+    padding: 8px 16px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.753);
+}
+a {
+    color: rgb(235, 1, 243);
+    text-decoration: none;
+}
+
+.vantaprojectButton {
+    background-color: #aa00ffa4;
+    color: rgb(17, 223, 255);
+    text-shadow: #555 0px 0px 3px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px #999;
+}
