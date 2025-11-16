@@ -189,7 +189,7 @@ export default function App() {
             </h2>
             <p className="text-zinc-300 leading-relaxed">
               The VANT∆ Project is a unified space for experiments in full-stack web development,
-              networking, and web utilities. I’m at the beginning of my
+              networking, security, and web utilities. I’m at the beginning of my
               full-stack development journey, building on a foundation in networking,
               security, and systems design. The VANT∆ Project is my living portfolio, a
               space to explore how the principles of infrastructure translate into the
@@ -255,8 +255,13 @@ export default function App() {
                 Résumé
               </a>
               </div>
-              <div className="mt-6 w-full max-w-sm">
+              <div className="mt-6 w-full max-w-sm space-y-4">
                 <DiscordStatus discordId="347416011928240128" />
+
+                <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=1887232"
+                className="w-full rounded-xl outline-none focus:outline-none"
+                scrolling="no">
+                </iframe>
               </div>
             </div>
           </div>
