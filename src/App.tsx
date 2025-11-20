@@ -68,6 +68,8 @@ export default function App() {
             <a
               href="https://github.com/v4nt4vo1d"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               GitHub
             </a>
@@ -124,6 +126,8 @@ export default function App() {
               <a
                 href="https://github.com/v4nt4vo1d"
                 className="rounded-lg px-3 py-2 text-sm text-zinc-200 hover:bg-white/5"
+                rel="noopener noreferrer"
+                target="_blank"
                 onClick={() => setMenuOpen(false)}
               >
                 GitHub
@@ -244,7 +248,7 @@ export default function App() {
                   GitHub
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/jacob-r-2228a8206/"
+                  href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
                   target="_blank" rel="noopener noreferrer">
                   LinkedIn
@@ -255,7 +259,7 @@ export default function App() {
                 Résumé
               </a>
               </div>
-              <div className="mt-6 w-full max-w-sm space-y-4">
+              <div className="mt-6 w-full max-w-sm space-y-3">
                 <DiscordStatus discordId="347416011928240128" />
 
                 <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=1887232"

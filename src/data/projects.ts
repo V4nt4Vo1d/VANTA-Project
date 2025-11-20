@@ -33,14 +33,23 @@ export const PROJECTS: Project[] = [
     tags: ['JavaScript', 'API', 'Full-Stack'],
     href: 'https://tacnet.space',
     status: 'Concept',
+    category: 'Applications',
+  },
+  {
+    title: 'Micro Sites',
+    blurb: 'A collection of small, focused web projects designed to explore specific front-end concepts, layouts, and interactive features—each built to hone my skills in HTML, CSS, and JavaScript through practical application.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    href: '/under-construction.html',
+    status: 'Concept',
     category: 'Web',
   },
   {
-    title: 'The Vant∆ Project',
+    title: 'The VANT∆ Project',
     blurb: 'An evolving personal portfolio built as an interactive web app, designed to grow alongside my skills and projects while exploring modern front-end structure, data integration, and creative UI design.',
-    tags: ['TypeScript', 'front-end', 'Security'],
+    tags: ['TypeScript', 'Front-end', 'Security'],
     href: '#',
     status: 'Beta',
     category: 'Web',
   },
+
 ]
