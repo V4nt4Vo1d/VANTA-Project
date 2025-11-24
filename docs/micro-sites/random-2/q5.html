@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asshole Quiz</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+            <p>Now we're cookin</p>
+            <h1><span>Do you say ‘no offense’ right before maximum offense?</span></h1>
+            <img width="500" height="500" src="images/offense.jpg" alt="alt">
+        <div class="btn-group">
+            <button onclick="saveAnswer('q5', 'yes')">Yes</button>
+            <button onclick="saveAnswer('q5', 'no')">No</button>
+        </div>
+    </div>
+    
+<script>
+    function saveAnswer(question, answer) {
+        localStorage.setItem(question, answer);
+        window.location.href = 'q6.html';
+    }
+</script>
+
+<button onclick="location.href='index.html'">Start Over</button>
+</body>
+</html>

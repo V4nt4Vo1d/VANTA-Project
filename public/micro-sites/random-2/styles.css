@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: #f4f4f4;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1 {
+    color: #222;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+    text-align: center;
+}
+h1, p {
+    margin-bottom: 20px;
+}
+img {
+    display: block;
+    object-fit: cover;
+    margin: 20px auto;
+    width: 100%;
+    max-height: 500px;
+    height: auto;
+    min-height: 250px;
+}
+button {
+    background-color: #c14b4b;
+    color: white;
+    padding: 12px 26px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+    transition: all 0.2s ease;
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(0, 140, 186, 0.3);
+}
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.container {
+    width: 600px;
+    max-width: 100%;
+    min-height: 700px; /* Keep a consistent height so pages don't reflow vertically */
+    margin: 40px auto;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    overflow-y: auto;
+}
+html {
+    /* keep vertical scrollbar visible so pages don't shift when content changes height */
+    overflow-y: scroll;
+}

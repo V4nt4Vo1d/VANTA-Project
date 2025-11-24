@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
     title: 'Micro Sites',
     blurb: 'A collection of small, focused web projects designed to explore specific front-end concepts, layouts, and interactive features—each built to hone my skills in HTML, CSS, and JavaScript through practical application.',
     tags: ['HTML', 'CSS', 'JavaScript'],
-    href: '/under-construction.html',
+    href: './micro-sites/Homepage/index.html',
     status: 'Concept',
     category: 'Web',
   },

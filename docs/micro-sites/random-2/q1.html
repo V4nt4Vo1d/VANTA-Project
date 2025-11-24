@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asshole Quiz</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <p>We'll start out easy...</p>
+        <h1>Do you leave your grocery cart in a empty parking spot?</h1>
+        <img width="500" height="300" src="images/shopping.jpg" alt="alt">
+        <div class="btn-group">
+            <button onclick="saveAnswer('q1', 'yes')">Yes</button>
+            <button onclick="saveAnswer('q1', 'no')">No</button>
+        </div>
+    </div>
+
+<script>
+    function saveAnswer(question, answer) {
+        localStorage.setItem(question, answer);
+        window.location.href = 'q2.html';
+    }
+</script>
+<button onclick="location.href='index.html'">Start Over</button>
+</body>
+</html>

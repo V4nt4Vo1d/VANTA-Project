@@ -1,0 +1,67 @@
+• MICRO SITE HOMEPAGE!
+
+• A fake online bookstore
+Covers, categories, grid layout.
+
+• "10 questions to know if you're an asshole"
+10 questions followed by an answer to find out if you're an asshole.
+
+• A restaurant menu page
+Typography practice heaven.
+
+• A travel brochure for a fictional planet
+Perfect for Star Citizen aesthetics.
+
+• A product page for a ridiculous gadget
+The “Quantum Toaster 9000.”
+
+• A minimalist blog homepage
+Just layout, spacing, and type hierarchy.
+
+• A gaming clan/team page
+Logo, roster list, schedule.
+
+• A card-style “profile directory”
+Grid of people with images and short bios.
+
+• A fake weather service homepage
+Big temperature readout, icons, clean layout.
+
+• A landing page for a fake app
+“Download,” feature list, screenshot mockups.
+
+• A museum exhibit page
+Hero banner, sections, captions.
+
+• A single-page résumé site
+Good layout practice.
+
+• A movie rating site
+Movie posters in a grid, star icons.
+
+• A pet adoption page
+Cards, colors, rounded corners galore.
+
+• A retro 90s website recreation
+Comic Sans optional. Chaos required.
+
+• A Star Citizen ship showcase
+One ship per section, stats table, big images.
+
+• A “Galactic News Network” homepage
+Headlines, columns, nav bars.
+
+• A minimalist photo gallery
+Grid + hover effects = instant practice.
+
+• A wiki-style article page
+Sidebars and typography.
+
+• A fake security terminal login screen
+Vanta-themed, neon, terminal-like.
+
+• A barber shop / tattoo parlor page
+Dark aesthetic + strong typography.
+
+• A cooking recipe card site
+Flexbox for cards, clean layout.

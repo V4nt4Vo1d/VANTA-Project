@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asshole Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Result</h1>
+        <p id="final"></p>
+        <img width="500" height="300" src="images/congrats.jpg" alt="alt">
+        <button onclick="localStorage.clear(); location.href='index.html'">Retake Quiz</button>
+    </div>
+
+    <script>
+        const q1 = localStorage.getItem('q1');
+        const q2 = localStorage.getItem('q2');
+        const q3 = localStorage.getItem('q3');
+        const q4 = localStorage.getItem('q4');
+        const q5 = localStorage.getItem('q5');
+        const q6 = localStorage.getItem('q6'); 
+        const q7 = localStorage.getItem('q7');
+        const q8 = localStorage.getItem('q8');
+        const q9 = localStorage.getItem('q9');
+        const q10 = localStorage.getItem('q10');
+
+        let score = 0;
+        
+        if (q1 === 'yes') score++;
+        if (q2 === 'yes') score++;
+        if (q3 === 'yes') score++;
+        if (q4 === 'yes') score++;
+        if (q5 === 'yes') score++;
+        if (q6 === 'yes') score++;
+        if (q7 === 'yes') score++;
+        if (q8 === 'yes') score++;
+        if (q9 === 'yes') score++;
+        if (q10 === 'yes') score++;
+
+        let message = "";
+
+        if (score === 0 ) {
+            message = "You're not an asshole. Shocking.";
+        } else if (score === 4) {
+            message = "You're maybe a mild asshole.";
+        } else {
+            message = "Certified asshole. Congrats!";
+        }
+
+        document.getElementById("final").textContent = message;
+
+    </script>
+
+</body>
+</html>
