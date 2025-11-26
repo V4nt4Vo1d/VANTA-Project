@@ -6,6 +6,9 @@ Covers, categories, grid layout.
 • "10 questions to know if you're an asshole"
 10 questions followed by an answer to find out if you're an asshole.
 
+• Animal rescue page
+page to adopt rabbits, cats, dogs
+
 • A restaurant menu page
 Typography practice heaven.
 
