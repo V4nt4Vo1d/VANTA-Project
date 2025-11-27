@@ -304,7 +304,6 @@ footer a {
     padding: 5px 0;
   }
 }
-/* Clean modern nav bar */
 .top-nav {
   display: flex;
   justify-content: center;
@@ -367,6 +366,26 @@ footer a {
     margin: 10px auto 20px auto;
     display: block;
   }
+}
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+@media (max-width: 600px) {
+    .back-button {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    body {
+        padding-top: 70px !important;
+    }
 }
 
 

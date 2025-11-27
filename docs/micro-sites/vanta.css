@@ -1,0 +1,152 @@
+/* ---- GLOBAL RESET ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---- BODY / PAGE ---- */
+body {
+    background: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* ---- HEADINGS ---- */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    color: #e9e9e9;
+}
+
+/* ---- TEXT ---- */
+p {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    opacity: 0.85;
+    line-height: 1.5;
+}
+
+/* ---- MAIN CONTAINER ---- */
+.container,
+.card-wrapper,
+.book-list {
+    width: 900px;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 90px; /* Leaves room for the back button */
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* ---- BUTTONS ---- */
+button {
+    background: linear-gradient(to bottom right, #007bff, #0056c9);
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.15s, opacity 0.15s;
+    margin: 0.5rem auto;
+    display: block;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* ---- BACK BUTTON ---- */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ---- IMAGES ---- */
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+/* ---- GRID LISTS (cards, books, animals, etc.) ---- */
+.grid,
+.book-list,
+.card-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.book-card,
+.card,
+.animal-card {
+    background: #222;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.book-card:hover,
+.card:hover,
+.animal-card:hover {
+    background: #2b2b2b;
+    transform: translateY(-4px);
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .container,
+    .book-list,
+    .card-wrapper {
+        margin-top: 75px;
+        padding: 20px 15px;
+    }
+
+    .back-button {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}

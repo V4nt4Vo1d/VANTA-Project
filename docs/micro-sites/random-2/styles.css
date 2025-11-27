@@ -76,4 +76,5 @@ button:active {
 html {
     /* keep vertical scrollbar visible so pages don't shift when content changes height */
     overflow-y: scroll;
+    
 }
