@@ -10,17 +10,37 @@
   <header>
     <nav class="top-nav">
       <a href="https://vantaproject.space" style="text-decoration: none;">← THE VANT∆ PROJECT</a>
+      <button id="logout-btn" class="logout-button">Logout</button>
     </nav>
   </header>
   <h1>Project Hub</h1>
   <p>A home for micro sites, experiments, and questionable ideas.</p>
 
   <div class="grid">
+    <div class="card"><a href="/odin-recipes/index.html">Odin Recipes</a></div>
+    <div class="card"><a href="/foundations-flexbox-landingpage/index.html">Flexbox Landing Page</a></div>
     <div class="card"><a href="../random-1/index.html">Bookstore 🔞</a></div>
     <div class="card"><a href="../random-2/index.html">Quiz 🔞</a></div>
     <div class="card"><a href="../random-3/index.html">Animal Rescue</a></div>
     <div class="card"><a href="../random-4/index.html">Product Review</a></div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabase = window.supabase.createClient(
+    "https://qpraoumykzkbfygopggf.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwcmFvdW15a3prYmZ5Z29wZ2dmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQzNTg1MjUsImV4cCI6MjA3OTkzNDUyNX0.MfTXva2szbPAkZmMBYkee2_pcPLzDEyYUKjghf45Zdo"
+  );
+    supabase.auth.getSession().then(({ data }) => {
+    if (!data.session) {
+      window.location.href = "https://vantaproject.space";
+    }
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "https://vantaproject.space";
+  });
+</script>
 
 </body>
 </html>

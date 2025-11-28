@@ -1,0 +1,137 @@
+:root {
+  --bg: #05080a;
+  --fg: #00faff;
+  --accent: #ff0088;
+  --success: #00ff88;
+  --error: #ff3355;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #082233 0, var(--bg) 50%);
+  color: var(--fg);
+  font-family: "Courier New", monospace;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.terminal {
+  position: relative;
+  width: 650px;
+  max-width: 95vw;
+  padding: 24px 24px 28px;
+  border: 1px solid var(--fg);
+  box-shadow:
+    0 0 30px #00faff66,
+    0 0 5px #00faffbb,
+    0 0 60px #ff008833;
+  background: #000000dd;
+  backdrop-filter: blur(5px);
+}
+
+.terminal::before {
+  content: "VANTΔ // SECURE LINK";
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  background: #000;
+  border: 1px solid var(--fg);
+}
+
+#boot-text {
+  white-space: pre-wrap;
+  margin-bottom: 18px;
+  min-height: 120px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7cf8ff;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 14px;
+  background: #000000aa;
+  border: 1px solid #00faff99;
+  color: var(--fg);
+  font-family: inherit;
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background: #00faff22;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  font-family: inherit;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.login-form button:hover {
+  background: #00faff55;
+}
+
+#result {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  text-shadow: 0 0 10px var(--fg);
+}
+
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+  mix-blend-mode: soft-light;
+  z-index: 999;
+}
+
+body {
+  animation: flicker 4s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.96; }
+}
+footer {
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #00faff88;
+  letter-spacing: 0.1em;
+}

@@ -39,21 +39,31 @@ p {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
   width: 90%;
   max-width: 900px;
   margin: 0 auto;
 }
 
+
 .card {
-  background: #1a1a1a;
-  padding: 1.3rem;
-  border-radius: 10px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #0f0f17;
+  border: 1px solid #1f1f2e;
   text-align: center;
-  border: 1px solid #222;
-  transition: transform 0.15s ease, background 0.2s ease;
+  color: #eaeaea;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  overflow-wrap: break-word;
 }
+
+.card a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 .card:hover {
   background: #242424;
@@ -67,20 +77,40 @@ a {
   font-weight: bold;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 400px) {
-  h1 {
-    font-size: 1.6rem;
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 0 1rem;
   }
 
   .card {
-    padding: 1rem;
+    width: 100%;
+    padding: 1.25rem;
+    box-sizing: border-box;
   }
 
   a {
+    display: inline-block;
+    width: 100%;
     font-size: 1rem;
+    white-space: normal;
   }
 }
+.logout-button {
+  display: inline-block;
+  margin-left: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ff3355;
+  background: #330000;
+  color: #ff6688;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.logout-button:hover {
+  background: #550000;
+}
+
+

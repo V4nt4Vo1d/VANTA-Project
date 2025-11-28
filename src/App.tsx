@@ -5,6 +5,10 @@ import { ProjectCard } from './components/ProjectCard'
 import { CATEGORIES, NAV, LOGO_SRC, type Category } from './data/constants'
 import { PROJECTS } from './data/projects'
 import DiscordStatus from "./components/DiscordStatus";
+import { supabase } from "./supabaseClient";
+import { supabase as supabaseClient } from "./supabaseClient";
+import VantaLogin from "./components/VantaLogin"; 
+
 
 
 export default function App() {
@@ -14,6 +18,24 @@ export default function App() {
 
   
   const [menuOpen, setMenuOpen] = useState(false)
+
+
+  const [session, setSession] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setAuthLoading(false);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -39,7 +61,18 @@ export default function App() {
     [category, query]
   )
 
-  return (
+    if (authLoading) return null;
+
+    if (!session) {
+      return <VantaLogin onAuthenticated={() => window.location.reload()} />;
+    }
+    async function handleLogout() {
+      await supabase.auth.signOut();
+      window.location.reload();
+    }
+
+    return (
+
     <div className="min-h-screen text-zinc-200 bg-[#0a0a0f] overflow-x-clip">
       <DeltaBackdrop />
 
@@ -77,8 +110,15 @@ export default function App() {
               href="under-construction.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
-              New Stuff!!
+              New Stuff
             </a>
+            <button
+              onClick={handleLogout}
+              className="rounded-xl border border-red-500/40 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 transition"
+            >
+              Logout
+            </button>
+
           </div>
 
 
@@ -138,6 +178,13 @@ export default function App() {
             >
               New Stuff!!
             </a>
+            <button
+              onClick={() => { handleLogout(); setMenuOpen(false); }}
+              className="rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 text-left"
+            >
+              Logout
+            </button>
+
             </div>
           </div>
         </div>
@@ -203,35 +250,6 @@ export default function App() {
             </p>
           </div>
         </section>
-
-
-
-        {/* <section id="about" className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <div className="grid md:grid-cols-3 gap-10 items-start">
-            <div className="md:col-span-2">
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">About the Project</h2>
-              <p className="mt-3 text-zinc-300 leading-relaxed">
-                The VANT∆ Project is a unified space for experiments in full-stack web, network tooling, and game-adjacent
-                utilities. I’m at the beginning of my full-stack development journey, building on a foundation in networking,
-                security, and systems design. The VANT∆ Project is my living portfolio, a space to explore how the
-                principles of infrastructure translate into the creative side of software. Each build here reflects that
-                blend of logic and curiosity: connecting networks, interfaces, and ideas through hands-on experimentation. My
-                goal is to grow from what I already know about systems into crafting the systems themselves and turning years
-                of technical groundwork into a new layer of development and design.
-              </p>
-              <p className="mt-3 text-zinc-400">- VANT∆</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 p-6 bg-white/[0.03]">
-              <h3 className="font-medium">Stack & Focus</h3>
-              <ul className="mt-3 space-y-2 text-sm text-zinc-300">
-                <li>• React + TypeScript + Tailwind</li>
-                <li>• Lightweight animations via Framer Motion</li>
-                <li>• JSON-driven projects data; future: GitHub API</li>
-                <li>• Accessibility and PWA on the roadmap</li>
-              </ul>
-            </div>
-          </div>
-        </section>*/}
 
         <section id="contact" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="rounded-2xl border border-white/10 p-8 bg-white/[0.03]">

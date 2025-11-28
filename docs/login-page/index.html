@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Δ Secure Terminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="terminal">
+    <div id="boot-text"></div>
+
+    <form id="login-form" class="login-form">
+      <label for="email">Operator ID (email):</label>
+      <input type="email" id="email" autocomplete="email" required>
+
+      <label for="password">Access Key:</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+
+      <button type="submit">INITIATE LOGIN</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- Supabase JS SDK (v2, CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="script.js"></script>
+    <footer>Δ VANTA SECURE TERMINAL</footer>
+</body>
+</html>
