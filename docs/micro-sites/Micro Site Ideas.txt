@@ -7,7 +7,10 @@ Covers, categories, grid layout.
 10 questions followed by an answer to find out if you're an asshole.
 
 • Animal rescue page
-page to adopt rabbits, cats, dogs
+Page to adopt rabbits, cats, dogs
+
+• Product review page
+A page to review products.
 
 • A restaurant menu page
 Typography practice heaven.

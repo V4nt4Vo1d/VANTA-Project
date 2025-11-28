@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #f8f9fa;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Header */
+.site-header {
+    background: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.site-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.site-header p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: #555;
+}
+
+.intro {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+    color: #444;
+    font-size: 1.05rem;
+}
+
+.review-grid {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.review-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #222;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+    border-color: #0077ff;
+    box-shadow: 0 4px 12px rgba(0, 119, 255, 0.15);
+}
+
+.review-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.review-card .subtitle {
+    font-size: 0.9rem;
+    color: #0077ff;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.site-footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    margin-top: 350px;
+}
+
+.review-container {
+    max-width: 800px;
+    background: #fff;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.review-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stars {
+    font-size: 1.5rem;
+    color: #ffc107;
+    margin-bottom: 20px;
+}
+
+.review-container p {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #0077ff;
+    font-weight: 600;
+}
+.back:hover {
+    text-decoration: underline;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.review-container,
+.intro {
+    padding: 20px;
+}
+.back-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 18px;
+    background: #0077ff;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background: #005fcc;
+    transform: translateY(-2px);
+}
+
+
+@media (max-width: 480px) {
+
+    body {
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .site-header {
+        padding: 30px 15px;
+    }
+
+    .site-header h1 {
+        font-size: 1.7rem;
+        line-height: 1.2;
+    }
+
+    .site-header p {
+        font-size: 1rem;
+    }
+
+    .intro {
+        padding: 0 15px;
+        font-size: 1rem;
+    }
+
+    .review-grid {
+        padding: 10px;
+        gap: 15px;
+        grid-template-columns: 1fr;
+    }
+
+    .review-card {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .review-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .review-card .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .review-container {
+        margin: 20px 10px;
+        padding: 20px 16px;
+    }
+
+    .review-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .stars {
+        font-size: 1.3rem;
+    }
+
+    .back-button {
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+}
+
+/* For medium phones (481px–768px) */
+@media (max-width: 768px) {
+
+    .review-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 15px;
+    }
+
+    .review-card {
+        padding: 20px;
+    }
+
+    .review-container {
+        margin: 30px 15px;
+    }
+}
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 15px;
+}
+
+.site-header .back-button {
+    margin-top: 0;
+}
+
