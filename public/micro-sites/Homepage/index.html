@@ -19,8 +19,8 @@
   <div class="grid">
     <div class="card"><a href="/odin-recipes/index.html">Odin Recipes</a></div>
     <div class="card"><a href="/foundations-flexbox-landingpage/index.html">Flexbox Landing Page</a></div>
-    <div class="card"><a id="protectedLink" href="../random-1/index.html">Bookstore 🔞</a></div>
-    <div class="card"><a id="protectedLink" href="../random-2/index.html">Quiz 🔞</a></div>
+    <div class="card"><a class="protectedLink" href="../random-1/index.html">Bookstore 🔞</a></div>
+    <div class="card"><a class="protectedLink" href="../random-2/index.html">Quiz 🔞</a></div>
     <div class="card"><a href="../random-3/index.html">Animal Rescue</a></div>
     <div class="card"><a href="../random-4/index.html">Product Review</a></div>
   </div>
@@ -59,7 +59,7 @@
 
 <script>
 const SECRET_PASSWORD = "myfatherinlawisanasshole";
-const protectedLink = document.querySelector("#protectedLink");
+const protectedLink = document.querySelectorAll(".protectedLink");
 
 const modal = document.getElementById("passwordModal");
 const input = document.getElementById("passwordInput");
@@ -67,17 +67,22 @@ const submit = document.getElementById("passwordSubmit");
 const cancel = document.getElementById("passwordCancel");
 const error = document.getElementById("passwordError");
 
-protectedLink.onclick = (e) => {
-  e.preventDefault();
-  modal.style.display = "flex";
-  input.value = "";
-  error.textContent = "";
-  input.focus();
-};
+protectedLink.forEach(link => {
+  link.onclick = (e) => {
+    e.preventDefault();
+    modal.style.display = "flex";
+    input.value = "";
+    error.textContent = "";
+    input.focus();
+
+    modal.dataset.target = link.href;
+  };
+});
+
 
 submit.onclick = () => {
   if (input.value === SECRET_PASSWORD) {
-    window.location = protectedLink.href;
+    window.location = modal.dataset.target;
   } else {
     error.textContent = "Incorrect password.";
   }
