@@ -112,5 +112,58 @@ a {
 .logout-button:hover {
   background: #550000;
 }
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #111;
+  padding: 25px;
+  width: 90%;
+  max-width: 350px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  border: 1px solid #444;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  font-family: sans-serif;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  background: #0af;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button.cancel {
+  background: #555;
+}
+
+.error {
+  color: #ff5252;
+  margin-top: 10px;
+  height: 18px;
+}
 
 

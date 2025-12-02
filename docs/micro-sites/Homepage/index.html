@@ -19,12 +19,27 @@
   <div class="grid">
     <div class="card"><a href="/odin-recipes/index.html">Odin Recipes</a></div>
     <div class="card"><a href="/foundations-flexbox-landingpage/index.html">Flexbox Landing Page</a></div>
-    <div class="card"><a href="../random-1/index.html">Bookstore 🔞</a></div>
-    <div class="card"><a href="../random-2/index.html">Quiz 🔞</a></div>
+    <div class="card"><a id="protectedLink" href="../random-1/index.html">Bookstore 🔞</a></div>
+    <div class="card"><a id="protectedLink" href="../random-2/index.html">Quiz 🔞</a></div>
     <div class="card"><a href="../random-3/index.html">Animal Rescue</a></div>
     <div class="card"><a href="../random-4/index.html">Product Review</a></div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <div id="passwordModal" class="modal">
+  <div class="modal-content">
+    <h2>Restricted Access</h2>
+    <p>This area requires a password. Please ask the administrator for access.</p>
+
+    <input type="password" id="passwordInput" placeholder="Enter password... (only if you know it)" />
+
+    <button id="passwordSubmit">Enter</button>
+    <button id="passwordCancel" class="cancel">Cancel</button>
+
+    <p id="passwordError" class="error"></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const supabase = window.supabase.createClient(
     "https://qpraoumykzkbfygopggf.supabase.co",
@@ -40,6 +55,44 @@
     await supabase.auth.signOut();
     window.location.href = "https://vantaproject.space";
   });
+</script>
+
+<script>
+const SECRET_PASSWORD = "myfatherinlawisanasshole";
+const protectedLink = document.querySelector("#protectedLink");
+
+const modal = document.getElementById("passwordModal");
+const input = document.getElementById("passwordInput");
+const submit = document.getElementById("passwordSubmit");
+const cancel = document.getElementById("passwordCancel");
+const error = document.getElementById("passwordError");
+
+protectedLink.onclick = (e) => {
+  e.preventDefault();
+  modal.style.display = "flex";
+  input.value = "";
+  error.textContent = "";
+  input.focus();
+};
+
+submit.onclick = () => {
+  if (input.value === SECRET_PASSWORD) {
+    window.location = protectedLink.href;
+  } else {
+    error.textContent = "Incorrect password.";
+  }
+};
+
+cancel.onclick = () => {
+  modal.style.display = "none";
+};
+
+modal.onclick = (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
 </script>
 
 </body>
