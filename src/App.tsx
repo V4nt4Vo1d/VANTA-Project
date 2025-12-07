@@ -107,10 +107,10 @@ export default function App() {
               GitHub
             </a>
             <a
-              href="under-construction.html"
+              href="streams.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
-              New Stuff
+              Streams
             </a>
             <button
               onClick={handleLogout}
@@ -255,15 +255,27 @@ export default function App() {
           <div className="rounded-2xl border border-white/10 p-8 bg-white/[0.03]">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Here are some links!</h2>
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Here are some links to connect!</h2>
                 <p className="mt-2 text-zinc-400">If you have any questions or want to connect, feel free to reach out.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 [overflow-wrap:anywhere]">
-                <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
-                  Email
+                <a href="https://discord.com/users/347416011928240128" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  Discord
                 </a>
                 <a href="https://github.com/v4nt4vo1d" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   GitHub
+                </a>
+                <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  Email
+                </a>
+                <a href="https://tryhackme.com/p/VANTA" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  TryHackMe
+                </a>
+                <a href="https://www.twitch.tv/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  Twitch
+                </a>
+                <a href="https://www.youtube.com/@VANTAxxTV" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  YouTube
                 </a>
                 <a
                   href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"

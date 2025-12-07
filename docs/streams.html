@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VANT∆ Transmission Hub</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #050505;
+    font-family: 'Orbitron', sans-serif;
+    color: #c9f0ff;
+    text-align: center;
+  }
+
+  h1 {
+    margin-top: 30px;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    color: #7dfdff;
+    text-shadow: 0 0 12px #00eaffcc;
+  }
+
+  #live-indicator {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    width: max-content;
+    border-radius: 8px;
+    background: #111;
+    border: 2px solid #00eaff77;
+    display: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  #live-indicator.active {
+    display: inline-block;
+    color: #ff3b3b;
+    border-color: #ff3b3b;
+    box-shadow: 0 0 15px #ff3b3bcc;
+    animation: pulse 1.4s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px #ff3b3bcc; }
+    50% { box-shadow: 0 0 20px #ff3b3bff; }
+    100% { box-shadow: 0 0 10px #ff3b3bcc; }
+  }
+
+  #stream-container {
+    margin-top: 40px;
+    display: none;
+  }
+
+  iframe {
+    border: none;
+    width: 80%;
+    max-width: 1000px;
+    height: 560px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #00eaff55;
+  }
+
+  #offline-message {
+    margin-top: 50px;
+    display: none;
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>VANT∆ TRANSMISSION HUB</h1>
+
+<div id="live-indicator">LIVE NOW — Broadcasting…</div>
+
+<div id="stream-container">
+    <!-- Twitch embed -->
+    <iframe
+      id="twitch-player"
+      src="https://player.twitch.tv/?channel=vantaxxtv&parent=vantaproject.space"
+      allowfullscreen>
+    </iframe>
+
+    <!-- YouTube Live embed -->
+    <iframe
+      id="yt-player"
+      src="https://www.youtube.com/embed/live_stream?channel=vantaxxtv"
+      allowfullscreen>
+    </iframe>
+</div>
+
+<div id="offline-message">Awaiting Transmission… (offline)</div>
+
+<script>
+const TWITCH_USER = "vantaxxtv";
+const YT_CHANNEL_ID = "vantaxxtv";
+
+/*
+  Twitch API polling requires a Client-ID + OAuth token.
+  You can create these instantly (no coding) here:
+  https://dev.twitch.tv/console/apps
+*/
+const TWITCH_CLIENT_ID = "mxkusg4xkqd420t3hj95oe8iezoyy4";
+const TWITCH_AUTH_TOKEN = "xa8rzrgr73bhd3ioqrcqgzcl2m17zu";
+
+async function checkYouTubeLive() {
+  try {
+    const res = await fetch(
+      `https://www.youtube.com/channel/${YT_CHANNEL_ID}/live`
+    );
+    return res.url.includes("watch?v=");
+  } catch {
+    return false;
+  }
+}
+
+async function checkTwitchLive() {
+  try {
+    const res = await fetch(
+      `https://api.twitch.tv/helix/streams?user_login=${TWITCH_USER}`,
+      {
+        headers: {
+          "Client-ID": TWITCH_CLIENT_ID,
+          "Authorization": `Bearer ${TWITCH_AUTH_TOKEN}`
+        }
+      }
+    );
+    const data = await res.json();
+    return data.data.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+async function updateLiveState() {
+  const twitchLive = await checkTwitchLive();
+  const ytLive = await checkYouTubeLive();
+
+  const isLive = twitchLive || ytLive;
+// const isLive = true; // TEMPORARILY FORCE LIVE FOR DEMO
+
+  const indicator = document.getElementById("live-indicator");
+  const streamContainer = document.getElementById("stream-container");
+  const offlineMsg = document.getElementById("offline-message");
+
+  if (isLive) {
+    indicator.classList.add("active");
+    streamContainer.style.display = "block";
+    offlineMsg.style.display = "none";
+  } else {
+    indicator.classList.remove("active");
+    streamContainer.style.display = "none";
+    offlineMsg.style.display = "block";
+  }
+}
+
+updateLiveState();
+setInterval(updateLiveState, 30000);
+</script>
+
+</body>
+</html>
