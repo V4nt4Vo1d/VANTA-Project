@@ -7,7 +7,10 @@ import { PROJECTS } from './data/projects'
 import DiscordStatus from "./components/DiscordStatus";
 import { supabase } from "./supabaseClient";
 import { supabase as supabaseClient } from "./supabaseClient";
-import VantaLogin from "./components/VantaLogin"; 
+
+// Disabled Logout Logic for front page but keeping for future use
+
+// import VantaLogin from "./components/VantaLogin"; 
 
 
 
@@ -63,13 +66,15 @@ export default function App() {
 
     if (authLoading) return null;
 
-    if (!session) {
-      return <VantaLogin onAuthenticated={() => window.location.reload()} />;
-    }
-    async function handleLogout() {
-      await supabase.auth.signOut();
-      window.location.reload();
-    }
+    //Disabled Logout Logic for front page but keeping for future use
+
+    // if (!session) {
+    //   return <VantaLogin onAuthenticated={() => window.location.reload()} />;
+    // }
+    // async function handleLogout() {
+    //   await supabase.auth.signOut();
+    //   window.location.reload();
+    // }
 
     return (
 
@@ -112,12 +117,15 @@ export default function App() {
             >
               Streams
             </a>
-            <button
+
+            {/* Disabled Logout Button for front page but keeping for future use */}
+
+            {/* <button
               onClick={handleLogout}
               className="rounded-xl border border-red-500/40 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 transition"
             >
               Logout
-            </button>
+            </button> */}
 
           </div>
 
@@ -178,12 +186,14 @@ export default function App() {
             >
               New Stuff!!
             </a>
-            <button
+
+              {/* Disabled Logout Button for front page but keeping for future use */}
+            {/* <button
               onClick={() => { handleLogout(); setMenuOpen(false); }}
               className="rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 text-left"
             >
               Logout
-            </button>
+            </button> */}
 
             </div>
           </div>

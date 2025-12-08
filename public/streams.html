@@ -70,10 +70,23 @@
     font-size: 1.2rem;
     opacity: 0.7;
   }
+  .back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    background: url('https://img.icons8.com/ios-filled/50/ffffff/left.png') no-repeat center center;
+    background-size: 60%;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00eaff88;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 </style>
 </head>
 
 <body>
+<button class="back-btn" onclick="window.history.back()" rel="noopener noreferrer"></button>
 
 <h1>VANT∆ TRANSMISSION HUB</h1>
 
@@ -87,7 +100,8 @@
       allowfullscreen>
     </iframe>
 
-    <!-- YouTube Live embed
+    <!-- YouTube Live embed (add back when needed) -->
+    <!--
     <iframe
       id="yt-player"
       src="https://www.youtube.com/embed/live_stream?channel=vantaxxtv"
