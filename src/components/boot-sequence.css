@@ -1,0 +1,42 @@
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #00faff;
+  font-family: "Courier New", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.boot-text {
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-shadow: 0 0 8px #00eaffaa;
+}
+
+.scanlines {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  mix-blend-mode: soft-light;
+  z-index: 10000;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -39,6 +39,7 @@
   </div>
 </div>
 
+<!-- Disabled Logout Logic for front page but keeping for future use -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const supabase = window.supabase.createClient(
@@ -47,18 +48,19 @@
   );
     supabase.auth.getSession().then(({ data }) => {
     if (!data.session) {
-      window.location.href = "https://vantaproject.space";
+      window.location.href = "/";
     }
   });
 
   document.getElementById("logout-btn").addEventListener("click", async () => {
     await supabase.auth.signOut();
-    window.location.href = "https://vantaproject.space";
+    window.location.href = "/";
   });
 </script>
+<!-- Disabled Logout Logic for front page but keeping for future use -->
 
 <script>
-const SECRET_PASSWORD = "myfatherinlawisanasshole";
+const SECRET_PASSWORD = "thisisanunsecurepassword";
 const protectedLink = document.querySelectorAll(".protectedLink");
 
 const modal = document.getElementById("passwordModal");

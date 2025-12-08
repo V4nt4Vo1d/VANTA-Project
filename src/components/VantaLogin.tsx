@@ -8,12 +8,14 @@ export default function VantaLogin({ onAuthenticated }: { onAuthenticated: () =>
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<string | null>(null);
 
-  const bootText = [
-    "Δ SECURE TERMINAL v3.0",
-    "Link: VANTΔ-PROJECT // AUTH NODE",
-    "Cipher suites online...",
-    "Key exchange stable...",
-    "READY FOR OPERATOR LOGIN."
+   const bootText = [
+      "Δ SECURE TERMINAL v3.0",
+      "Uplink Node: VANTΔ-PROJECT // CORE AUTH CHANNEL",
+      "System integrity check… PASSED",
+      "Audit logs: SYNCHRONIZED",
+      "Monitoring subsystems: ACTIVE",
+      "Operator credentials required.",
+      "Access not provisioned? Contact system administrator."
   ].join("\n");
 
   useEffect(() => {
@@ -83,8 +85,8 @@ export default function VantaLogin({ onAuthenticated }: { onAuthenticated: () =>
       <footer className="mt-10 py-6 text-center text-sm leading-relaxed max-w-lg px-6 border-t border-red-500/40 text-red-400 font-medium tracking-wide">
         <p>RESTRICTED ACCESS — AUTHORIZED PERSONNEL ONLY</p>
         <p className="mt-2 text-red-300/80">
-          This system is monitored. Unauthorized use may result in administrative,
-          civil, or criminal penalties.
+          Activity on this system is logged and monitored. 
+          Unauthorized access is prohibited and may result in disciplinary or legal action.
         </p>
       </footer>
     </div>

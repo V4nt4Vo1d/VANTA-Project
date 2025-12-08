@@ -82,6 +82,46 @@
     box-shadow: 0 0 10px #00eaff88;
     transition: transform 0.2s, box-shadow 0.2s;
   }
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    margin-top: 20px;
+  }
+
+  #live-indicator {
+    font-size: 1rem;
+    padding: 8px 14px;
+  }
+
+  iframe {
+    width: 320px !important;
+    height: 180px !important;
+    max-width: 90%;
+    border-radius: 8px;
+  }
+
+  #offline-message {
+    font-size: 1rem;
+  }
+
+  .back-btn {
+    top: 20px;
+    left: 20px;
+    width: 34px;
+    height: 34px;
+    background-size: 55%;
+  }
+}
+
+@media (max-width: 420px) {
+  iframe {
+    width: 280px !important;
+    height: 158px !important;
+  }
+}
+
 </style>
 </head>
 

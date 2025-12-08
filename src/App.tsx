@@ -10,7 +10,8 @@ import { supabase as supabaseClient } from "./supabaseClient";
 
 // Disabled Logout Logic for front page but keeping for future use
 
-// import VantaLogin from "./components/VantaLogin"; 
+import VantaLogin from "./components/VantaLogin"; 
+import BootSequence from './components/BootSequence'
 
 
 
@@ -26,6 +27,8 @@ export default function App() {
   const [session, setSession] = useState<any>(null);
   const [authLoading, setAuthLoading] = useState(true);
 
+//Disabled Logout Logic for front page but keeping for future use
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
@@ -38,6 +41,7 @@ export default function App() {
 
     return () => listener.subscription.unsubscribe();
   }, []);
+//Disabled Logout Logic for front page but keeping for future use
 
 
   useEffect(() => {
@@ -64,17 +68,24 @@ export default function App() {
     [category, query]
   )
 
+
+  const [booting, setBooting] = useState(true);
+
+if (booting) {
+  return <BootSequence onComplete={() => setBooting(false)} />;
+}
+
+//Disabled Logout Logic for front page but keeping for future use
+
     if (authLoading) return null;
-
-    //Disabled Logout Logic for front page but keeping for future use
-
-    // if (!session) {
-    //   return <VantaLogin onAuthenticated={() => window.location.reload()} />;
-    // }
-    // async function handleLogout() {
-    //   await supabase.auth.signOut();
-    //   window.location.reload();
-    // }
+    if (!session) {
+      return <VantaLogin onAuthenticated={() => setSession({})} />;
+    }
+    async function handleLogout() {
+      await supabase.auth.signOut();
+      window.location.reload();
+    }
+//Disabled Logout Logic for front page but keeping for future use
 
     return (
 
@@ -98,11 +109,11 @@ export default function App() {
 
           {/* Desktop nav */}
           <div className="hidden sm:flex items-center gap-4">
-            {NAV.map((n) => (
+            {/* {NAV.map((n) => (
               <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-300 hover:text-white transition">
                 {n.label}
               </a>
-            ))}
+            ))} */}
             <a
               href="https://github.com/v4nt4vo1d"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
@@ -118,18 +129,18 @@ export default function App() {
               Streams
             </a>
 
-            {/* Disabled Logout Button for front page but keeping for future use */}
+{/* //Disabled Logout Logic for front page but keeping for future use */}
 
-            {/* <button
+            <button
               onClick={handleLogout}
               className="rounded-xl border border-red-500/40 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 transition"
             >
               Logout
-            </button> */}
+            </button>
 
           </div>
 
-
+{/* //Disabled Logout Logic for front page but keeping for future use */}
 
           {/* Mobile hamburger */}
           <div className="sm:hidden">
@@ -187,19 +198,19 @@ export default function App() {
               Streams
             </a>
 
-              {/* Disabled Logout Button for front page but keeping for future use */}
-            {/* <button
+{/* Disabled Logout Button for front page but keeping for future use */}
+            <button
               onClick={() => { handleLogout(); setMenuOpen(false); }}
               className="rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 text-left"
             >
               Logout
-            </button> */}
+            </button>
+{/* //Disabled Logout Logic for front page but keeping for future use */}
 
             </div>
           </div>
         </div>
       </header>
-
       {/* MAIN */}
       <main>
         <Hero />
