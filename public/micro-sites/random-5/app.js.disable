@@ -1,0 +1,101 @@
+async function loadTeam() {
+  const res = await fetch("data/team.json");
+  const team = await res.json();
+
+  // Header fields
+  document.getElementById("team-name").textContent = team.teamName;
+  document.getElementById("team-region").textContent = team.region;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const logoEl = document.getElementById("team-logo");
+  if (team.logo) {
+    logoEl.src = team.logo;
+  } else {
+    logoEl.style.display = "none";
+  }
+
+  // Compute average MMRs where ranks exist
+  const mmr2s = [];
+  const mmr3s = [];
+
+  team.players.forEach((p) => {
+    if (p.ranks && p.ranks["2v2"] && p.ranks["2v2"].mmr) {
+      mmr2s.push(p.ranks["2v2"].mmr);
+    }
+    if (p.ranks && p.ranks["3v3"] && p.ranks["3v3"].mmr) {
+      mmr3s.push(p.ranks["3v3"].mmr);
+    }
+  });
+
+  const avg = (arr) =>
+    arr.length ? Math.round(arr.reduce((a, b) => a + b, 0) / arr.length) : null;
+
+  const avg2 = avg(mmr2s);
+  const avg3 = avg(mmr3s);
+
+  document.getElementById("avg-2v2-mmr").textContent = avg2 ?? "–";
+  document.getElementById("avg-3v3-mmr").textContent = avg3 ?? "–";
+
+  renderPlayers(team.players);
+}
+
+function renderPlayers(players) {
+  const grid = document.getElementById("players-grid");
+  grid.innerHTML = "";
+
+  players.forEach((p) => {
+    const card = document.createElement("article");
+    card.className = "player-card";
+
+    const bestRank =
+      p.ranks?.["3v3"]?.rank ||
+      p.ranks?.["2v2"]?.rank ||
+      p.ranks?.["1v1"]?.rank ||
+      "Unranked";
+
+    card.innerHTML = `
+      <div class="player-header">
+        <div>
+          <div class="player-name">${p.name}</div>
+          <div class="player-role">${p.role || "Player"}</div>
+        </div>
+        <div class="badge">${bestRank}</div>
+      </div>
+
+      <div class="player-platform">Platform: ${p.platform}</div>
+
+      <div class="ranks">
+        ${renderRankRow("1v1", p.ranks?.["1v1"])}
+        ${renderRankRow("2v2", p.ranks?.["2v2"])}
+        ${renderRankRow("3v3", p.ranks?.["3v3"])}
+      </div>
+
+      <div class="player-footer">
+        ${
+          p.trackerUrl
+            ? `<a href="${p.trackerUrl}" target="_blank" rel="noopener noreferrer" class="profile-link">
+                 View on tracker.gg
+               </a>`
+            : "<span class='mmr'>No profile linked</span>"
+        }
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function renderRankRow(label, data) {
+  if (!data) return "";
+  return `
+    <div class="rank-row">
+      <span class="label">${label}</span>
+      <span class="value">${data.rank}</span>
+      <span class="mmr">${data.mmr} MMR</span>
+    </div>
+  `;
+}
+
+loadTeam().catch((err) => {
+  console.error("Failed to load team.json", err);
+});

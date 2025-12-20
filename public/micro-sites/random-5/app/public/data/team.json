@@ -1,0 +1,45 @@
+{
+  "teamName": "Not Really Good",
+  "region": "USA",
+  "logo": "./images/logo.png",
+  "players": [
+    {
+      "name": "VANT\u2206",
+      "platform": "Epic",
+      "role": "",
+      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/epic/VANTA/overview",
+      "twitch": "vantaxxtv",
+      "ranks": {
+        "2v2": {
+          "mmr": 664,
+          "rank": "Plat 1 Div 1"
+        },
+        "1v1": {
+          "mmr": 498,
+          "rank": "Gold 1 Div 2"
+        }
+      }
+    },
+    {
+      "name": "Fahxey",
+      "platform": "Steam",
+      "role": "",
+      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/steam/7656119XXXXXXXXX/overview",
+      "twitch": "fahxey",
+      "ranks": {
+        "2v2": {
+          "mmr": 669,
+          "rank": "Plat 1 Div 1"
+        },
+        "1v1": {
+          "mmr": 547,
+          "rank": "Gold 2 Div 1"
+        }
+      }
+    }
+  ],
+  "ballchasing": {
+    "groupId": "not-really-good-xvysjw9lge",
+    "note": "Waiting for ballchasing data..."
+  }
+}
