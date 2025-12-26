@@ -1,18 +1,18 @@
 {
   "teamName": "Not Really Good",
-  "region": "USA",
-  "logo": "./images/logo.png",
+  "region": "NRG",
+  "logo": "images/logo.png",
   "players": [
     {
       "name": "VANT\u2206",
       "platform": "Epic",
       "role": "",
-      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/epic/VANTA/overview",
+      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/epic/v4nt4vo1d/overview",
       "twitch": "vantaxxtv",
       "ranks": {
         "2v2": {
           "mmr": 664,
-          "rank": "Plat 1 Div 1"
+          "rank": "Plat 1 Div 2"
         },
         "1v1": {
           "mmr": 498,
@@ -24,12 +24,12 @@
       "name": "Fahxey",
       "platform": "Steam",
       "role": "",
-      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/steam/7656119XXXXXXXXX/overview",
+      "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/steam/76561198305933912/overview",
       "twitch": "fahxey",
       "ranks": {
         "2v2": {
           "mmr": 669,
-          "rank": "Plat 1 Div 1"
+          "rank": "Plat 1 Div 2"
         },
         "1v1": {
           "mmr": 547,

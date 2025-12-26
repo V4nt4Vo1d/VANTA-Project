@@ -1,5 +1,5 @@
 const API = {
-  team: "/api/team",
+  team: "./data/team.json",
   twitchLive: (logins) => `/api/twitch/live?logins=${encodeURIComponent(logins.join(","))}`,
   matches: "/api/ballchasing/recent",
   saveSnapshot: "/api/team/snapshot",
@@ -93,9 +93,10 @@ function renderPlayers(team, liveMap) {
       : `<span class="mmr">No Twitch</span>`;
 
     const embedId = login ? `twitch-${login}` : null;
-    const embedShell = (login && live)
+    const embedShell = login
       ? `<div class="twitch-embed"><div class="embed-shell" id="${embedId}"></div></div>`
       : "";
+
 
     card.innerHTML = `
       <div class="player-header">
@@ -129,7 +130,7 @@ function renderPlayers(team, liveMap) {
 
     grid.appendChild(card);
 
-    if (login && live) {
+    if (login) {
       const tryStart = () => {
         if (!canUseTwitchEmbed()) return false;
         const target = document.getElementById(embedId);
@@ -239,6 +240,25 @@ function renderMatches(payload) {
   }
 }
 
+async function getLiveMapNoBackend(logins) {
+  const live = {};
+
+  await Promise.all(
+    logins.map(async (login) => {
+      try {
+        const url = `https://decapi.me/twitch/online/${encodeURIComponent(login)}`;
+        const txt = await fetch(url, { cache: "no-store" }).then(r => r.text());
+        live[login] = txt.trim().toLowerCase() === "true";
+      } catch {
+        live[login] = false;
+      }
+    })
+  );
+
+  return live;
+}
+
+
 async function load() {
   const team = await fetchJson(API.team);
 
@@ -263,15 +283,21 @@ async function load() {
     .map(p => (p.twitch ? safeText(p.twitch).toLowerCase() : null))
     .filter(Boolean);
 
+  // let liveMap = {};
+  // if (logins.length) {
+  //   try {
+  //     const res = await fetchJson(API.twitchLive(logins));
+  //     liveMap = res?.live || {};
+  //   } catch (e) {
+  //     console.warn("Twitch live check failed:", e);
+  //   }
+  // }
+
   let liveMap = {};
-  if (logins.length) {
-    try {
-      const res = await fetchJson(API.twitchLive(logins));
-      liveMap = res?.live || {};
-    } catch (e) {
-      console.warn("Twitch live check failed (ok if not configured):", e);
-    }
-  }
+if (logins.length) {
+  liveMap = await getLiveMapNoBackend(logins);
+}
+
 
   renderPlayers(team, liveMap);
 
@@ -279,7 +305,7 @@ async function load() {
     const matches = await fetchJson(API.matches);
     renderMatches(matches);
   } catch (e) {
-    renderMatches({ ok: false, note: "Match endpoint unavailable. Start the local server with BALLCHASING_API_KEY to enable." });
+    renderMatches({ ok: false, note: "Match endpoint unavailable." });
   }
 
   setupAdmin(team);
