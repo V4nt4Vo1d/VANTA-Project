@@ -268,3 +268,11 @@ h2 { margin: 12px 0 0; }
   .footer { padding: 10px 16px; }
   .grid-2{ grid-template-columns: 1fr; }
 }
+
+.btn.btn--ghost--PH {
+  border-color: rgba(255,255,255,0.12);
+  color: var(--muted);
+  margin-left: 25px;
+  margin-top: 25px;
+
+}
