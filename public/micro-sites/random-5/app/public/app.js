@@ -5,6 +5,57 @@ const API = {
   saveSnapshot: "/api/team/snapshot",
 };
 
+const LOCAL_KEY = "rltt_team_overrides_v1";
+
+function readOverrides() {
+  try {
+    return JSON.parse(localStorage.getItem(LOCAL_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function writeOverrides(obj) {
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(obj));
+}
+
+function applyOverrides(team) {
+  const ov = readOverrides();
+  if (!ov.players) return team;
+
+  team.players = team.players || [];
+  for (const [idxStr, patch] of Object.entries(ov.players)) {
+    const idx = Number(idxStr);
+    const p = team.players[idx];
+    if (!p || !patch) continue;
+
+    p.ranks = p.ranks || {};
+    for (const mode of Object.keys(patch)) {
+      p.ranks[mode] = { ...(p.ranks[mode] || {}), ...(patch[mode] || {}) };
+    }
+  }
+
+  if (Array.isArray(ov.snapshots)) {
+    team.snapshots = Array.isArray(team.snapshots) ? team.snapshots : [];
+    team.snapshots = [...team.snapshots, ...ov.snapshots];
+  }
+
+  return team;
+}
+
+function downloadJson(filename, obj) {
+  const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+
 function qs(sel) { return document.querySelector(sel); }
 function el(id) { return document.getElementById(id); }
 
@@ -260,7 +311,9 @@ async function getLiveMapNoBackend(logins) {
 
 
 async function load() {
-  const team = await fetchJson(API.team);
+  let team = await fetchJson(API.team);
+  team = applyOverrides(team);
+
 
   el("team-name").textContent = team.teamName || "Your Team";
   el("team-name-footer").textContent = team.teamName || "Your Team";
@@ -365,19 +418,40 @@ function setupAdmin(team) {
       }
     };
 
-    try {
-      const res = await fetch(API.saveSnapshot, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(await res.text());
+try {
+  const ov = readOverrides();
+  ov.players = ov.players || {};
+  ov.snapshots = ov.snapshots || [];
 
-      hide();
-      await load();
-    } catch (e) {
-      alert("Could not save snapshot. This only works when running the local server.\n\n" + e.message);
-    }
+  // Save rank overrides for that player index
+  ov.players[idx] = ov.players[idx] || {};
+  for (const mode of Object.keys(payload.ranks)) {
+    const r = payload.ranks[mode];
+    if (!r) continue;
+
+    ov.players[idx][mode] = {
+      ...(ov.players[idx][mode] || {}),
+      ...(r.rank ? { rank: r.rank } : {}),
+      ...(typeof r.mmr === "number" && !Number.isNaN(r.mmr) ? { mmr: r.mmr } : {}),
+    };
+  }
+
+  ov.snapshots.push({
+    createdAt: new Date().toISOString(),
+    playerIndex: idx,
+    ranks: payload.ranks,
+  });
+
+  writeOverrides(ov);
+
+  const merged = applyOverrides(structuredClone(team));
+  downloadJson("team.json", merged);
+
+  hide();
+  await load();
+} catch (e) {
+  alert("Could not save locally.\n\n" + e.message);
+}
   });
 }
 

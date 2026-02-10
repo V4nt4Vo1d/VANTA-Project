@@ -58,10 +58,8 @@ export function useGithub() {
         if (!rres.ok) throw new Error(`Repos request failed: ${rres.status}`)
         let rdata: GithubRepo[] = await rres.json()
 
-        // Hygiene filters (forks/archived/no name)
         rdata = rdata.filter(r => !r.fork && !r.archived && !!r.name && !!r.html_url)
 
-        // ---- Blocklist (by name or owner/name) ----
         if (BLOCK_REPOS.length) {
           const block = new Set(BLOCK_REPOS.map(s => s.toLowerCase()))
           rdata = rdata.filter(r => {
@@ -71,8 +69,6 @@ export function useGithub() {
           })
         }
 
-        // ---- Allowlist (pinned) ----
-        // If PINNED_REPOS has entries, show ONLY those, in that exact order.
         if (PINNED_REPOS.length) {
           const pinOrder = PINNED_REPOS.map(s => s.toLowerCase())
           const byKey = new Map<string, GithubRepo>()
@@ -87,7 +83,6 @@ export function useGithub() {
           rdata = pinOrder.map(key => byKey.get(key)).filter(Boolean) as GithubRepo[]
         }
 
-        // ---- Clamp ----
         if (typeof MAX_REPOS === 'number') rdata = rdata.slice(0, MAX_REPOS)
 
         if (!cancelled) {

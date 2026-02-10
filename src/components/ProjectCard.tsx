@@ -29,7 +29,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   )
 }
 
-// Hover glow helper (sets CSS vars --x / --y)
+// Hover glow helper
 if (typeof window !== 'undefined') {
   window.addEventListener('pointermove', (e) => {
     const target = (e.target as HTMLElement)?.closest?.('.group')

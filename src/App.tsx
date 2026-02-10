@@ -11,7 +11,7 @@ import { supabase as supabaseClient } from "./supabaseClient";
 // Disabled Logout Logic for front page but keeping for future use
 
 import VantaLogin from "./components/VantaLogin"; 
-import BootSequence from './components/BootSequence'
+// import BootSequence from './components/BootSequence'
 
 
 
@@ -29,18 +29,19 @@ export default function App() {
 
 //Disabled Logout Logic for front page but keeping for future use
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setAuthLoading(false);
-    });
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data }) => {
+  //     setSession(data.session);
+  //     setAuthLoading(false);
+  //   });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+  //   const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
 
-    return () => listener.subscription.unsubscribe();
-  }, []);
+  //   return () => listener.subscription.unsubscribe();
+  // }, []);
+
 //Disabled Logout Logic for front page but keeping for future use
 
 
@@ -71,20 +72,21 @@ export default function App() {
 
   const [booting, setBooting] = useState(true);
 
-if (booting) {
-  return <BootSequence onComplete={() => setBooting(false)} />;
-}
+// if (booting) {
+//   return <BootSequence onComplete={() => setBooting(false)} />;
+// }
 
 //Disabled Logout Logic for front page but keeping for future use
 
-    if (authLoading) return null;
-    if (!session) {
-      return <VantaLogin onAuthenticated={() => setSession({})} />;
-    }
-    async function handleLogout() {
-      await supabase.auth.signOut();
-      window.location.reload();
-    }
+    // if (authLoading) return null;
+    // if (!session) {
+    //   return <VantaLogin onAuthenticated={() => setSession({})} />;
+    // }
+    // async function handleLogout() {
+    //   await supabase.auth.signOut();
+    //   window.location.reload();
+    // }
+
 //Disabled Logout Logic for front page but keeping for future use
 
     return (
@@ -131,16 +133,18 @@ if (booting) {
 
 {/* //Disabled Logout Logic for front page but keeping for future use */}
 
-            <button
+            {/* <button
               onClick={handleLogout}
               className="rounded-xl border border-red-500/40 px-3 py-1.5 text-sm text-red-400 hover:bg-red-500/10 transition"
             >
               Logout
-            </button>
-
-          </div>
+            </button> */}
 
 {/* //Disabled Logout Logic for front page but keeping for future use */}
+          
+          </div>
+
+
 
           {/* Mobile hamburger */}
           <div className="sm:hidden">
@@ -199,12 +203,12 @@ if (booting) {
             </a>
 
 {/* Disabled Logout Button for front page but keeping for future use */}
-            <button
+            {/* <button
               onClick={() => { handleLogout(); setMenuOpen(false); }}
               className="rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 text-left"
             >
               Logout
-            </button>
+            </button> */}
 {/* //Disabled Logout Logic for front page but keeping for future use */}
 
             </div>
@@ -304,11 +308,11 @@ if (booting) {
                   target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
-                <a
+                {/* <a
                 href={`${import.meta.env.BASE_URL}resume.html`}
                 className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
                 Résumé
-              </a>
+              </a> */}
               </div>
               <div className="mt-6 w-full max-w-sm space-y-3">
                 <DiscordStatus discordId="347416011928240128" />

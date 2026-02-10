@@ -175,7 +175,8 @@ function seedDb() {
       description: "It is both toasted and not toasted until you open the lid. Warning: may collapse reality into crumbs.",
       priceCents: 25069,
       status: "available",
-      createdAt: "2025-12-26T18:04:12.994Z"
+      createdAt: "2025-12-26T18:04:12.994Z",
+      imageUrl: "images/toaster.jpg"
     },
     {
       id: 2,
@@ -184,7 +185,8 @@ function seedDb() {
       description: "Organic, free-range opinions. Great for family dinners. May cause unstoppable rage.",
       priceCents: 1069,
       status: "available",
-      createdAt: "2025-12-26T18:24:12.994Z"
+      createdAt: "2025-12-26T18:24:12.994Z",
+      imageUrl: "images/opinions.jpg"
     },
     {
       id: 3,
@@ -193,7 +195,8 @@ function seedDb() {
       description: "I am selling my left-handed screwdriver for screws that spin the wrong way.",
       priceCents: 2069,
       status: "available",
-      createdAt: "2025-12-26T18:34:12.994Z"
+      createdAt: "2025-12-26T18:34:12.994Z",
+      imageUrl: "images/screwdriver.jpg"
     },
     {
       id: 4,
@@ -202,7 +205,8 @@ function seedDb() {
       description: "Always six inches short of where I need it. Selling because I refuse to rearrange furniture again.",
       priceCents: 1969,
       status: "available",
-      createdAt: "2025-12-26T18:49:12.994Z"
+      createdAt: "2025-12-26T18:49:12.994Z",
+      imageUrl: "images/extension-cord.jpg"
     },
     {
       id: 5,
@@ -211,7 +215,8 @@ function seedDb() {
       description: "Functions perfectly until someone important is watching. Selling because I don’t trust it during presentations.",
       priceCents: 2569,
       status: "sold",
-      createdAt: "2025-12-26T19:09:12.994Z"
+      createdAt: "2025-12-26T19:09:12.994Z",
+      imageUrl: "images/hdmi-cable.jpg"
     },
     {
       id: 6,
@@ -220,7 +225,8 @@ function seedDb() {
       description: "I keep giving this away for free and people keep asking me to stop. Figured I’d try monetizing it. No refunds, I will still have opinions. If you purchase this you can reach me to recieve your unsolicited advice at any time on instagram @vantaxxtv",
       priceCents: 269,
       status: "sold",
-      createdAt: "2025-12-26T19:24:12.994Z"
+      createdAt: "2025-12-26T19:24:12.994Z",
+      imageUrl: "images/unsolicited-advice.jpg"
     },
     {
       id: 7,
@@ -229,7 +235,8 @@ function seedDb() {
       description: "Technically works. Prints absolutely nothing, flawlessly. Great if you’re into minimalism or avoiding documentation.",
       priceCents: 2069,
       status: "available",
-      createdAt: "2025-12-26T19:39:12.994Z"
+      createdAt: "2025-12-26T19:39:12.994Z",
+      imageUrl: "images/invisible-ink-printer.jpg"
     },
     {
       id: 8,
@@ -238,7 +245,8 @@ function seedDb() {
       description: "Every single key is Ctrl. I assumed muscle memory would carry me through. It did not. Technically functional if your workflow is 90% undoing mistakes.",
       priceCents: 1569,
       status: "available",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/ctrl-keyboard.jpg"
     },
     {
       id: 9,
@@ -247,7 +255,8 @@ function seedDb() {
       description: "Had more of this before meetings. Still functional, just quieter.",
       priceCents: 469,
       status: "sold",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/confidence.jpg"
     },
     {
       id: 10,
@@ -256,7 +265,8 @@ function seedDb() {
       description: "Shreds junk mail flawlessly. Jams immediately on anything important.",
       priceCents: 1069,
       status: "available",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/paper-shredder.jpg"
     },
     {
       id: 11,
@@ -265,7 +275,8 @@ function seedDb() {
       description: "Starts every morning after a brief pause to consider the day. AC works on settings 1 and 5 only. Check engine light comes on occasionally for self-expression. Selling because we’ve both grown and need different things now.",
       priceCents: 420000,
       status: "available",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/passat.jpg"
     },
     {
       id: 12,
@@ -274,7 +285,8 @@ function seedDb() {
       description: "Smooth ride. Plenty of space. Dashboard lights up like a Christmas tree but the mechanic says “it’s fine.” I trust him more than the lights.",
       priceCents: 950000,
       status: "available",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/focus.jpg"
     },
     {
       id: 13,
@@ -283,7 +295,8 @@ function seedDb() {
       description: "Not pretty. Not quiet. Has hauled things it probably shouldn’t have. Refuses to die out of spite.",
       priceCents: 560000,
       status: "available",
-      createdAt: "2025-12-26T19:54:12.994Z"
+      createdAt: "2025-12-26T19:54:12.994Z",
+      imageUrl: "images/ram1500.jpg"
     }
   ];
 

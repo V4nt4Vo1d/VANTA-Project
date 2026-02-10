@@ -8,21 +8,21 @@ The **VANT∆ Project** serves as a personal introduction and creative space. It
 ## 🛠️ Features
 - Responsive custom webpage built from scratch
 - Sections highlighting:
-  - Personal introduction and background
+  - Projects
   - Interests and learning journey
   - Contact links (GitHub, email, etc.)
 - Semantic HTML and clean CSS layout
 
 ## 🚀 Getting Started
-To view the project locally:
-- Wait until I'm done lol
+To view the project visit: vantaproject.space
 
 ## 🎯 Skills Practiced
 - Semantic HTML structure
 - CSS styling and layout basics
 - Creating a simple personal portfolio page
-- Using Git and GitHub for version contro
-
+- Using Git and GitHub for version control
+- JavaScript, Typescript & React
+ 
 ## 📝 Notes
 This project is focused on **clarity, accessibility, and clean structure** as a professional personal showcase. Future updates may include additional styling and JavaScript features for interactivity.
 
