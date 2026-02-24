@@ -11,6 +11,7 @@ import { supabase as supabaseClient } from "./supabaseClient";
 // Disabled Logout Logic for front page but keeping for future use
 
 import VantaLogin from "./components/VantaLogin"; 
+import HelpDropdown from './components/HelpDropdown'
 // import BootSequence from './components/BootSequence'
 
 
@@ -130,6 +131,8 @@ export default function App() {
             >
               Streams
             </a>
+            <HelpDropdown />
+
 
 {/* //Disabled Logout Logic for front page but keeping for future use */}
 
