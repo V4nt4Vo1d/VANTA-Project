@@ -28,12 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
   input.addEventListener('input', update);
   select.addEventListener('change', update);
 
-  // Populate categories from data-category attributes if present
   const categories = new Set(['All']);
   cards.forEach((c) => {
     if (c.dataset && c.dataset.category) categories.add(c.dataset.category);
   });
-  // Render categories if any extras
   if (categories.size > 1) {
     select.innerHTML = Array.from(categories)
       .map((c) => `<option value="${c}">${c}</option>`)
