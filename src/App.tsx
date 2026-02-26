@@ -126,10 +126,22 @@ export default function App() {
               GitHub
             </a>
             <a
+              href="help.html"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+            >
+              Help
+            </a>
+            <a
               href="streams.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               Streams
+            </a>
+            <a
+              href="suggestions.html"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+            >
+              Suggestions
             </a>
             <HelpDropdown />
 
@@ -199,10 +211,22 @@ export default function App() {
                 GitHub
               </a>
               <a
+              href="help.html"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+            >
+              Help
+            </a>
+              <a
               href="streams.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               Streams
+            </a>
+              <a
+              href="suggestions.html"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+            >
+              Suggestions
             </a>
 
 {/* Disabled Logout Button for front page but keeping for future use */}

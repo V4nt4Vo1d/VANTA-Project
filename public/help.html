@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VANT∆ Help & About</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .back-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      width: 40px;
+      height: 40px;
+      background: url('https://img.icons8.com/ios-filled/50/ffffff/left.png') no-repeat center center;
+      background-size: 60%;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00eaff88;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 14px #00eaffaa;
+    }
+    @media (max-width: 768px) {
+      .back-btn {
+        top: 20px;
+        left: 20px;
+        width: 34px;
+        height: 34px;
+        background-size: 55%;
+      }
+    }
+
+    h1 {
+      color: #7dfdff;
+      text-shadow: 0 0 8px #00eaff99;
+    }
+    h2 {
+      color: #c9f0ff;
+      border-bottom: 2px solid #00eaff55;
+      padding-bottom: 0.25rem;
+    }
+
+  </style>
+</head>
+<body class="min-h-screen bg-[#0a0a0f] text-zinc-200 px-6 py-12 flex flex-col items-center">
+  <button class="back-btn" onclick="window.history.back()" aria-label="Go back"></button>
+
+  <h1 class="text-4xl font-semibold mb-8 text-center">Help &amp; Information</h1>
+
+  <main class="prose prose-invert max-w-3xl space-y-12">
+    <section>
+      <h2>What is the VANT∆ Project?</h2>
+      <p>
+        Hi, I&rsquo;m VANT∆ (a.k.a. <code>v4nt4vo1d</code>). I come from a background in
+        networking and cyber‑security, and this project lets me mix that foundation with
+        frontend and backend web work. When you see a new feature or design tweak here, it&rsquo;s
+        usually the result of something I&rsquo;m trying out for the first time.
+      </p>
+      <br />
+        <p>
+            The VANT∆ Project is the place where I&rsquo;m learning and experimenting with full‑stack
+            development, networking, security, and web tools. I started building this site as my
+            portfolio and playground while I worked through <em>The Odin Project</em>
+            and other resources. It&rsquo;s intended to grow over time. That said if you have any questions, suggestions, or ideas for features, please let me know on the <a href="suggestions.html" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Suggestions &amp; Feedback</a> page or via any of my socials (links are available on the home page). I read every message and appreciate the support!
+        </p>
+    </section>
+
+    <section>
+      <h2>Gaming Streams &amp; Schedule</h2>
+      <p>
+        I stream on Twitch and Youtube under the name VANTAxxTV. I also plan to start streaming to other platforms like TikTok, Instagram, and Facebook.
+        Most evenings you can find me online between <strong>6‑8 PM MST</strong>. I mainly play a
+        mix of Rocket League, Star Citizen, and ARC Raiders. If you
+        enjoy one of those games feel free to check out my stream on either <a href="https://www.twitch.tv/vantaxxtv" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Twitch</a> or <a href="https://www.youtube.com/@VANTAxxTV" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">YouTube</a>.
+        I also have an <a href="https://www.instagram.com/vantaxxtv" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Instagram </a>where I will be posting highlights and clips from my streams, so check that out if you want to see some of the best moments without having to watch the whole stream!
+        If you have any suggestion on games to play or want to see me try something new, let me know on the <a href="suggestions.html" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Suggestions &amp; Feedback</a> page!
+      </p>
+      <br />
+      <p>
+        I stream 2v2 Rocket League with <a href="https://www.twitch.tv/fahxey" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Fahxey</a> as the team <a href="micro-sites/random-5/app/public/index.html" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">NRG </a>(Not Really Good). 
+        You will also see us stream ARC Raiders and eventually we will be streaming Star Citizen! You can check out his Twitch linked
+        above. He also has an <a href="https://www.instagram.com/fahxey" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">Instagram</a> and <a href="https://www.youtube.com/@fahxey" target="_blank" rel="noopener noreferrer" style="color: #7dfdff; text-shadow: 0 0 8px #00eaff99;">YouTube</a> channel where he posts highlights and other content.
+      </p>
+    </section>
+
+    <section>
+      <h2>Need More Help?</h2>
+      <p>
+        If you&rsquo;re looking for something that isn&rsquo;t covered here or want to send a
+        suggestion, head to the <a href="suggestions.html">Suggestions &amp; Feedback</a> page or
+        message me though any of my socials (links are available on the home page).
+      </p>
+    </section>
+  </main>
+
+</body>
+</html>

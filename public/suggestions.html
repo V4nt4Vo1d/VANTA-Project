@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VANT∆ Suggestions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .back-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      width: 40px;
+      height: 40px;
+      background: url('https://img.icons8.com/ios-filled/50/ffffff/left.png') no-repeat center center;
+      background-size: 60%;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00eaff88;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 14px #00eaffaa;
+    }
+    @media (max-width: 768px) {
+      .back-btn {
+        top: 20px;
+        left: 20px;
+        width: 34px;
+        height: 34px;
+        background-size: 55%;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0a0a0f] text-zinc-200 flex flex-col items-center p-8">
+  <button class="back-btn" onclick="window.history.back()" aria-label="Go back"></button>
+
+  <h1 class="text-3xl sm:text-4xl font-semibold text-center mb-6">
+    Suggestions &amp; Feedback
+  </h1>
+  <p class="max-w-xl text-center text-zinc-400 mb-8">
+    Have ideas to improve the site or gaming suggestions? Drop them in below and let me know!
+  </p>
+
+  <form id="suggestion-form" class="w-full max-w-lg space-y-4">
+    <input
+      type="email"
+      name="email"
+      placeholder="Your email (optional)"
+      class="w-full bg-black/40 border border-white/10 px-4 py-2 rounded-xl text-sm placeholder-zinc-400"
+    />
+    <textarea
+      name="message"
+      placeholder="Your suggestion"
+      required
+      class="w-full h-40 bg-black/40 border border-white/10 px-4 py-2 rounded-xl text-sm resize-none placeholder-zinc-400"
+    ></textarea>
+    <button
+      type="submit"
+      class="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold px-6 py-2 rounded-xl transition"
+    >
+      Submit suggestion
+    </button>
+  </form>
+  <div id="status" class="mt-4 text-sm text-zinc-300"></div>
+
+  <script>
+    document.getElementById('suggestion-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = encodeURIComponent(e.target.email.value.trim());
+      const message = encodeURIComponent(e.target.message.value.trim());
+      const subject = encodeURIComponent('Website/Game Suggestion');
+      const body = `Email: ${email}%0D%0A%0D%0A${message}`;
+      window.location.href = `mailto:v4nt4vo1d@gmail.com?subject=${subject}&body=${body}`;
+      document.getElementById('status').textContent = 'Opening mail client...';
+    });
+  </script>
+</body>
+</html>

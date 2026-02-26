@@ -27,14 +27,14 @@ export const PROJECTS: Project[] = [
   //   status: 'Live',
   //   category: 'Web',
   // },
-    {
-    title: 'The VANT∆ Project',
-    blurb: 'An evolving personal portfolio built as an interactive web app, designed to grow alongside my skills and projects while exploring modern front-end structure, data integration, and creative UI design.',
-    tags: ['TypeScript', 'Front-end', 'Security'],
-    href: '#',
-    status: 'Beta',
-    category: 'Web',
-  },
+  //   {
+  //   title: 'The VANT∆ Project',
+  //   blurb: 'An evolving personal portfolio built as an interactive web app, designed to grow alongside my skills and projects while exploring modern front-end structure, data integration, and creative UI design.',
+  //   tags: ['TypeScript', 'Front-end', 'Security'],
+  //   href: '#',
+  //   status: 'Beta',
+  //   category: 'Web',
+  // },
   {
     title: 'Micro Sites',
     blurb: 'A collection of small, focused web projects designed to explore specific front-end concepts, layouts, and interactive features—each built to hone my skills in HTML, CSS, and JavaScript through practical application.',
@@ -43,13 +43,13 @@ export const PROJECTS: Project[] = [
     status: 'Beta',
     category: 'Web',
   },
-  {
-    title: 'TACNET',
-    blurb: 'A dynamic web app inspired by Star Citizen, designed to manage ships and systems, interactively—built to progressively explore JavaScript logic, modular UI design, API integration, and feature full-stack integration.',
-    tags: ['JavaScript', 'API', 'Full-Stack'],
-    href: 'https://tacnet.space',
-    status: 'Concept',
-    category: 'Applications',
-  },
+  // {
+  //   title: 'TACNET',
+  //   blurb: 'A dynamic web app inspired by Star Citizen, designed to manage ships and systems, interactively—built to progressively explore JavaScript logic, modular UI design, API integration, and feature full-stack integration.',
+  //   tags: ['JavaScript', 'API', 'Full-Stack'],
+  //   href: 'https://tacnet.space',
+  //   status: 'Concept',
+  //   category: 'Applications',
+  // },
 
 ]
