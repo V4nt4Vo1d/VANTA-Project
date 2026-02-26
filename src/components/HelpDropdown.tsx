@@ -42,7 +42,7 @@ export default function HelpDropdown() {
 
       {open && (
         <div className="absolute right-0 mt-2 w-64 rounded-xl bg-black/80 border border-white/10 p-3 shadow-lg z-40">
-          <p className="text-sm text-zinc-300">Lost in the void? Quick links and troubleshooting.</p>
+          <p className="text-sm text-zinc-300">Lost in the void? Quick links and suggestions.</p>
           <ul className="mt-3 space-y-2">
             <li>
               <a href="help.html" className="block text-sm text-zinc-200 hover:bg-white/5 rounded px-2 py-1">
