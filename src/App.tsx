@@ -125,24 +125,24 @@ export default function App() {
             >
               GitHub
             </a>
-            <a
+            {/* <a
               href="help.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               Help
-            </a>
+            </a> */}
             <a
               href="streams.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               Streams
             </a>
-            <a
+            {/* <a
               href="suggestions.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
             >
               Suggestions
-            </a>
+            </a> */}
             <HelpDropdown />
 
 
