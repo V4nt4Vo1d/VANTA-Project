@@ -16,6 +16,13 @@
   <h1>Project Hub</h1>
   <p>A home for micro sites, experiments, and questionable ideas.</p>
 
+  <div class="search-bar" style="margin:1rem 0;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
+    <select id="categorySelect" style="background:#0a0a0f;border:1px solid rgba(255,255,255,.08);color:#e6e6e6;padding:.5rem .75rem;border-radius:12px;font-size:.9rem;">
+      <option>All</option>
+    </select>
+    <input id="projectSearch" placeholder="Search projects…" style="background:#0a0a0f;border:1px solid rgba(255,255,255,.08);color:#e6e6e6;padding:.5rem .75rem;border-radius:12px;font-size:.95rem;min-width:220px;" />
+  </div>
+
   <div class="grid">
     <div class="card"><a href="/odin-recipes/index.html">Odin Recipes</a></div>
     <div class="card"><a href="/foundations-flexbox-landingpage/index.html">Flexbox Landing Page</a></div>
@@ -44,7 +51,7 @@
 </div>
 
 <!-- Disabled Logout Logic for front page but keeping for future use -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     const supabase = window.supabase.createClient(
     "https://qpraoumykzkbfygopggf.supabase.co",
@@ -60,7 +67,7 @@
     await supabase.auth.signOut();
     window.location.href = "/";
   });
-</script>
+</script> -->
 <!-- Disabled Logout Logic for front page but keeping for future use -->
 
 <script>
@@ -106,6 +113,7 @@ modal.onclick = (e) => {
 
 </script>
 
+  <script src="search.js"></script>
 </body>
 </html>
 

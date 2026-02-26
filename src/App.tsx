@@ -251,10 +251,10 @@ export default function App() {
             <div>
               <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Projects</h2>
               <p className="text-zinc-400 mt-1">
-                A living portfolio. Here are all my current projects, in progress and completed.
+              Here are all my current projects, in progress and completed.
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Category)}
@@ -272,7 +272,7 @@ export default function App() {
                 placeholder="Search projects…"
                 className="bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm w-48 sm:w-64"
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
