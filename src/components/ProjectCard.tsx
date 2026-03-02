@@ -3,13 +3,17 @@ import { StatusBadge } from './StatusBadge'
 import type { Project } from '../data/projects'
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const isComing = project.status === 'Coming Soon'
   return (
     <motion.a
-      href={project.href}
+      href={isComing ? undefined : project.href}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-5 hover:border-white/20"
+      className={
+        `group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-5 ` +
+        (isComing ? 'opacity-60 pointer-events-none' : 'hover:border-white/20')
+      }
     >
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition" style={{
         background:
@@ -29,7 +33,6 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   )
 }
 
-// Hover glow helper
 if (typeof window !== 'undefined') {
   window.addEventListener('pointermove', (e) => {
     const target = (e.target as HTMLElement)?.closest?.('.group')

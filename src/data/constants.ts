@@ -5,7 +5,7 @@ export const NAV = [
   { id: 'contact', label: 'Contact' },
 ] as const
 
-export const CATEGORIES = ['All', 'Web', 'Applications', 'Security'] as const
+export const CATEGORIES = ['All', 'Web', 'Applications', 'Security', 'Coming Soon'] as const
 export type Category = typeof CATEGORIES[number]
 
 export const GITHUB_USER = 'v4nt4vo1d'

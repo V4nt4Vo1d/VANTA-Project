@@ -101,10 +101,8 @@ export default function App() {
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
           aria-label="Main"
         >
-          {/* Brand */}
           <a href="#" className="flex items-center gap-3 min-w-0">
             <img src={LOGO_SRC} alt="VANT∆" className="h-10 w-10 object-contain shrink-0" />
-            {/* Keep title hidden on small screens to prevent collision */}
             <span className="hidden sm:block font-semibold tracking-widest text-sm truncate">
               THE VANT∆ PROJECT
             </span>
