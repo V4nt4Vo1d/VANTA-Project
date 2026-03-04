@@ -6,14 +6,39 @@ import { fileURLToPath } from "url";
 
 import { getLiveMap } from "./twitch.js";
 import { getRecentReplays } from "./ballchasing.js";
-
-dotenv.config();
+import { fetchTrackerRoster } from "./tracker.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const appRoot = path.join(__dirname, "..");
+const random5Root = path.join(appRoot, "..");
+
+dotenv.config({ path: path.join(appRoot, ".env") });
+dotenv.config({ path: path.join(random5Root, ".env"), override: false });
 
 const app = express();
 app.use(express.json({ limit: "1mb" }));
+
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes("*")) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  } else if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, TRN-Api-Key");
+
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
 
 const publicDir = path.join(__dirname, "..", "public");
 const teamPath = path.join(publicDir, "data", "team.json");
@@ -109,6 +134,19 @@ app.get("/api/ballchasing/recent", async (req, res) => {
     res.json(payload);
   } catch (e) {
     res.status(503).json({ ok: false, note: "Ballchasing not configured or request failed.", details: String(e) });
+  }
+});
+
+app.get("/api/tracker/roster", async (req, res) => {
+  try {
+    const raw = fs.readFileSync(teamPath, "utf-8");
+    const team = JSON.parse(raw);
+
+    const payload = await fetchTrackerRoster(team);
+    res.setHeader("Cache-Control", "no-store");
+    res.json(payload);
+  } catch (e) {
+    res.status(503).json({ ok: false, note: "Tracker not configured or request failed.", details: String(e) });
   }
 });
 

@@ -1,8 +1,29 @@
+function resolveApiBase() {
+  const explicitBase = (window?.RLTT_CONFIG?.apiBase || "").toString().trim();
+  if (explicitBase) return explicitBase.replace(/\/+$/, "");
+
+  const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  if (isLocal) return "";
+
+  return "";
+}
+
+const API_BASE = resolveApiBase();
+
+if (!API_BASE && window.location.hostname.includes("github.io")) {
+  console.warn("RLTT API base is not configured. Set window.RLTT_CONFIG.apiBase in public/config.js");
+}
+
+function apiUrl(path) {
+  return API_BASE ? `${API_BASE}${path}` : path;
+}
+
 const API = {
   team: "./data/team.json",
-  twitchLive: (logins) => `/api/twitch/live?logins=${encodeURIComponent(logins.join(","))}`,
-  matches: "/api/ballchasing/recent",
-  saveSnapshot: "/api/team/snapshot",
+  twitchLive: (logins) => apiUrl(`/api/twitch/live?logins=${encodeURIComponent(logins.join(","))}`),
+  matches: apiUrl("/api/ballchasing/recent"),
+  trackerRoster: apiUrl("/api/tracker/roster"),
+  saveSnapshot: apiUrl("/api/team/snapshot"),
 };
 
 const LOCAL_KEY = "rltt_team_overrides_v1";
@@ -148,6 +169,18 @@ function renderPlayers(team, liveMap) {
       ? `<div class="twitch-embed"><div class="embed-shell" id="${embedId}"></div></div>`
       : "";
 
+    const trackerStats = p.trackerStats
+      ? `
+        <div class="tracker-stats">
+          <span class="pill">W ${p.trackerStats.wins ?? "—"}</span>
+          <span class="pill">G ${p.trackerStats.goals ?? "—"}</span>
+          <span class="pill">A ${p.trackerStats.assists ?? "—"}</span>
+          <span class="pill">Saves ${p.trackerStats.saves ?? "—"}</span>
+          <span class="pill">Shots ${p.trackerStats.shots ?? "—"}</span>
+        </div>
+      `
+      : "";
+
 
     card.innerHTML = `
       <div class="player-header">
@@ -168,6 +201,8 @@ function renderPlayers(team, liveMap) {
         ${renderRankRow("2v2", p.ranks?.["2v2"])}
         ${renderRankRow("3v3", p.ranks?.["3v3"])}
       </div>
+
+      ${trackerStats}
 
       ${embedShell}
 
@@ -219,6 +254,31 @@ function fmtDate(iso) {
   } catch { return iso; }
 }
 
+function renderTeamPanel(name, goals, top, players = []) {
+  const rows = players.length
+    ? players.map((p) => `
+      <div class="team-player-row">
+        <span class="name">${p.name || "Unknown"}</span>
+        <span class="stats">${p.score} • ${p.goals}G ${p.assists}A ${p.saves}S ${p.shots}Sh ${p.demos}D</span>
+      </div>
+    `).join("")
+    : `<div class="muted tiny">No player stats available.</div>`;
+
+  return `
+    <div class="team-panel">
+      <div class="team-panel-head">
+        <span class="team-name">${name || "Team"}</span>
+        <span class="pill">Goals ${typeof goals === "number" ? goals : "—"}</span>
+      </div>
+      <div class="kv">
+        <span class="k">Top performer</span>
+        <span class="v">${top || "—"}</span>
+      </div>
+      <div class="team-player-list">${rows}</div>
+    </div>
+  `;
+}
+
 function renderMatches(payload) {
   const grid = el("matches-grid");
   const empty = el("matches-empty");
@@ -239,7 +299,7 @@ function renderMatches(payload) {
     const card = document.createElement("article");
     card.className = "match-card";
 
-    const title = `${m.playlist || "Match"} • ${m.map || "Unknown Arena"}`;
+    const title = `${m.playlist || "Unknown Playlist"} • ${m.map || "Unknown Arena"}`;
     const when = m.date ? fmtDate(m.date) : "—";
 
     const score = (typeof m.blueGoals === "number" && typeof m.orangeGoals === "number")
@@ -255,16 +315,21 @@ function renderMatches(payload) {
       : "";
 
     const pills = [];
+    if (m.playlist) pills.push(`<span class="pill">${m.playlist}</span>`);
+    if (m.map) pills.push(`<span class="pill">${m.map}</span>`);
     if (m.duration) pills.push(`<span class="pill">${m.duration}</span>`);
     if (m.overtime) pills.push(`<span class="pill">OT</span>`);
     if (m.season) pills.push(`<span class="pill">${m.season}</span>`);
     if (m.teamSize) pills.push(`<span class="pill">${m.teamSize}v${m.teamSize}</span>`);
 
+    const bluePanel = renderTeamPanel(m.blueTeamName, m.blueGoals, m.blueTopPerformer, m.bluePlayers);
+    const orangePanel = renderTeamPanel(m.orangeTeamName, m.orangeGoals, m.orangeTopPerformer, m.orangePlayers);
+
     card.innerHTML = `
       <div class="match-head">
         <div>
           <div class="match-title">${title}</div>
-          <div class="match-meta">${when}</div>
+          <div class="match-meta">Match date: ${when}</div>
         </div>
         <div class="pills">
           ${resultPill}
@@ -272,17 +337,16 @@ function renderMatches(payload) {
         </div>
       </div>
 
-      <div class="kv">
-        <span class="k">Top performer</span>
-        <span class="v">${m.topPlayer || "—"}</span>
-      </div>
-
       <div class="pills">
         ${pills.join("")}
       </div>
 
+      <div class="team-panels">
+        ${bluePanel}
+        ${orangePanel}
+      </div>
+
       <div class="player-footer">
-        <span class="muted tiny">${m.note || ""}</span>
         ${replayLink}
       </div>
     `;
@@ -312,6 +376,23 @@ async function getLiveMapNoBackend(logins) {
 
 async function load() {
   let team = await fetchJson(API.team);
+
+  try {
+    const tracker = await fetchJson(API.trackerRoster);
+    if (tracker?.ok && Array.isArray(tracker.players)) {
+      for (const entry of tracker.players) {
+        if (!entry?.ok) continue;
+        const p = team?.players?.[entry.index];
+        if (!p) continue;
+        p.ranks = { ...(p.ranks || {}), ...(entry.ranks || {}) };
+        p.trackerStats = entry.trackerStats || p.trackerStats || null;
+        p.trackerUpdatedAt = entry.trackerUpdatedAt || p.trackerUpdatedAt || null;
+      }
+    }
+  } catch (e) {
+    console.warn("Tracker roster fetch failed:", e);
+  }
+
   team = applyOverrides(team);
 
 
@@ -328,9 +409,8 @@ async function load() {
     logoEl.style.display = "none";
   }
 
-  const { avg2, avg3 } = computeAverages(team.players || []);
+  const { avg2 } = computeAverages(team.players || []);
   el("avg-2v2-mmr").textContent = avg2 ?? "–";
-  el("avg-3v3-mmr").textContent = avg3 ?? "–";
 
   const logins = (team.players || [])
     .map(p => (p.twitch ? safeText(p.twitch).toLowerCase() : null))

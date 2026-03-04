@@ -8,6 +8,10 @@
       "platform": "Epic",
       "role": "",
       "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/epic/v4nt4vo1d/overview",
+      "tracker": {
+        "platform": "epic",
+        "id": "v4nt4vo1d"
+      },
       "twitch": "vantaxxtv",
       "ranks": {
         "2v2": {
@@ -25,6 +29,10 @@
       "platform": "Steam",
       "role": "",
       "trackerUrl": "https://rocketleague.tracker.network/rocket-league/profile/steam/76561198305933912/overview",
+      "tracker": {
+        "platform": "steam",
+        "id": "Fahxey"
+      },
       "twitch": "fahxey",
       "ranks": {
         "2v2": {
