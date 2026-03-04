@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Your Result</h1>
         <p id="final"></p>
-        <img width="500" height="300" src="images/congrats.jpg" alt="alt">
+        <img id="result-image" width="500" height="300" src="" alt="alt">
         <button onclick="localStorage.clear(); location.href='index.html'">Retake Quiz</button>
     </div>
 
@@ -25,6 +25,10 @@
         const q8 = localStorage.getItem('q8');
         const q9 = localStorage.getItem('q9');
         const q10 = localStorage.getItem('q10');
+        const q11 = localStorage.getItem('q11');
+        const q12 = localStorage.getItem('q12');
+        const q13 = localStorage.getItem('q13');
+        const q14 = localStorage.getItem('q14');
 
         let score = 0;
         
@@ -38,18 +42,41 @@
         if (q8 === 'yes') score++;
         if (q9 === 'yes') score++;
         if (q10 === 'yes') score++;
+        if (q11 === 'yes') score++;
+        if (q12 === 'yes') score++;
+        if (q13 === 'yes') score++;
+        if (q14 === 'yes') score++;
 
         let message = "";
 
-        if (score === 0 ) {
+        if (score < 4 ) {
             message = "You're not an asshole. Shocking.";
-        } else if (score === 4) {
+        } else if (score >= 4 && score <= 6) {
             message = "You're maybe a mild asshole.";
         } else {
             message = "Certified asshole. Congrats!";
         }
 
         document.getElementById("final").textContent = message;
+
+    </script>
+
+    <script>
+        const result_image = localStorage.getItem('result_image');
+
+        let image = 0;
+
+        let src = "";
+
+        if (score < 4 ) {
+            src = "images/asshole1.jpg";
+        } else if (score >= 4 && score <= 6) {
+            src = "images/asshole2.jpg";
+        } else {
+            src = "images/asshole3.jpg";
+        }
+
+        document.getElementById("result-image").src = src;
 
     </script>
 

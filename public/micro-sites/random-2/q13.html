@@ -8,19 +8,18 @@
 </head>
 <body>
     <div class="container">
-            <p>Almost fully cooked. One more to go!</p>
-            <h1><span>Do you think everyone else is an asshole? If so maybe the real asshole is you all along.</span></h1>
-            <img width="500" height="300" src="images/toilet.jpg" alt="alt">
+            <h1><span>Do you wear your pants down at your ankles?</span></h1>
+            <img width="500" height="300" src="images/baggy.jpg" alt="alt">
         <div class="btn-group">
-            <button onclick="saveAnswer('q10', 'yes')">Yes</button>
-            <button onclick="saveAnswer('q10', 'no')">No</button>
+            <button onclick="saveAnswer('q13', 'yes')">Yes</button>
+            <button onclick="saveAnswer('q13', 'no')">No</button>
         </div>
     </div>
 
     <script>
         function saveAnswer(question, answer) {
             localStorage.setItem(question, answer);
-            window.location.href = 'q11.html';
+            window.location.href = 'q14.html';
         }
     </script>
 
