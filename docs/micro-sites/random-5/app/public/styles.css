@@ -277,6 +277,35 @@ h2 { margin: 12px 0 0; }
   flex-wrap: wrap;
 }
 
+.api-status-row {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.api-status-item {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+}
+
+.api-status-item.ok {
+  color: #8fffc3;
+  border-color: rgba(143,255,195,0.35);
+}
+
+.api-status-item.warn {
+  color: #ffe18f;
+  border-color: rgba(255,225,143,0.35);
+}
+
+.api-status-item.err {
+  color: #ff9fa9;
+  border-color: rgba(255,159,169,0.35);
+}
+
 .muted { color: var(--muted); }
 .tiny { font-size: 0.82rem; }
 

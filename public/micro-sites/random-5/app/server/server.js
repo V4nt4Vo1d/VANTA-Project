@@ -19,18 +19,49 @@ dotenv.config({ path: path.join(random5Root, ".env"), override: false });
 const app = express();
 app.use(express.json({ limit: "1mb" }));
 
+function normalizeOriginValue(value) {
+  return (value || "").toString().trim().toLowerCase().replace(/\/+$/, "");
+}
+
+function toHostname(value) {
+  const input = normalizeOriginValue(value);
+  if (!input) return "";
+  try {
+    return new URL(input).hostname.toLowerCase();
+  } catch {
+    return input.replace(/^https?:\/\//, "").split("/")[0].toLowerCase();
+  }
+}
+
+const strictCors = process.env.STRICT_CORS === "true";
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
   .split(",")
-  .map((s) => s.trim())
+  .map((s) => normalizeOriginValue(s))
   .filter(Boolean);
+
+function isOriginAllowed(origin) {
+  if (!origin) return true;
+  if (allowedOrigins.includes("*")) return true;
+
+  const normalizedOrigin = normalizeOriginValue(origin);
+  const requestHost = toHostname(normalizedOrigin);
+
+  return allowedOrigins.some((allowed) => {
+    if (allowed === normalizedOrigin) return true;
+    return toHostname(allowed) === requestHost;
+  });
+}
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
+
   if (allowedOrigins.includes("*")) {
     res.setHeader("Access-Control-Allow-Origin", "*");
-  } else if (origin && allowedOrigins.includes(origin)) {
+  } else if (origin && isOriginAllowed(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Vary", "Origin");
+  } else if (!strictCors) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
   }
 
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");

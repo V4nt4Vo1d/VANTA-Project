@@ -91,6 +91,14 @@ async function fetchJson(url) {
 
 function safeText(s) { return (s ?? "").toString(); }
 
+function setApiStatus(kind, label, state = "") {
+  const target = kind === "tracker" ? el("api-status-tracker") : el("api-status-ballchasing");
+  if (!target) return;
+  target.textContent = label;
+  target.classList.remove("ok", "warn", "err");
+  if (state) target.classList.add(state);
+}
+
 function computeAverages(players) {
   const mmr2s = [];
   const mmr3s = [];
@@ -377,20 +385,36 @@ async function getLiveMapNoBackend(logins) {
 async function load() {
   let team = await fetchJson(API.team);
 
+  setApiStatus("ballchasing", "Ballchasing: checking…");
+  setApiStatus("tracker", "Tracker: checking…");
+
   try {
     const tracker = await fetchJson(API.trackerRoster);
     if (tracker?.ok && Array.isArray(tracker.players)) {
+      let liveCount = 0;
       for (const entry of tracker.players) {
         if (!entry?.ok) continue;
+        liveCount++;
         const p = team?.players?.[entry.index];
         if (!p) continue;
         p.ranks = { ...(p.ranks || {}), ...(entry.ranks || {}) };
         p.trackerStats = entry.trackerStats || p.trackerStats || null;
         p.trackerUpdatedAt = entry.trackerUpdatedAt || p.trackerUpdatedAt || null;
       }
+
+      if (liveCount > 0) {
+        setApiStatus("tracker", `Tracker: live (${liveCount})`, "ok");
+      } else {
+        const firstErr = tracker.players.find((x) => x && x.ok === false)?.reason || "fallback";
+        const isAuth = typeof firstErr === "string" && /401|invalid authentication/i.test(firstErr);
+        setApiStatus("tracker", isAuth ? "Tracker: unauthorized" : "Tracker: fallback", "warn");
+      }
+    } else {
+      setApiStatus("tracker", "Tracker: unavailable", "warn");
     }
   } catch (e) {
     console.warn("Tracker roster fetch failed:", e);
+    setApiStatus("tracker", "Tracker: error", "err");
   }
 
   team = applyOverrides(team);
@@ -437,8 +461,11 @@ if (logins.length) {
   try {
     const matches = await fetchJson(API.matches);
     renderMatches(matches);
+    const hasItems = matches?.ok === true && Array.isArray(matches.items) && matches.items.length > 0;
+    setApiStatus("ballchasing", hasItems ? `Ballchasing: live (${matches.items.length})` : "Ballchasing: no matches", hasItems ? "ok" : "warn");
   } catch (e) {
     renderMatches({ ok: false, note: "Match endpoint unavailable." });
+    setApiStatus("ballchasing", "Ballchasing: error", "err");
   }
 
   setupAdmin(team);
