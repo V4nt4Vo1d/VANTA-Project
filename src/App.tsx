@@ -141,6 +141,12 @@ export default function App() {
             >
               Suggestions
             </a> */}
+            <a
+              href="#about"
+              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+            >
+              About
+            </a>
             <HelpDropdown />
 
 
@@ -288,7 +294,7 @@ export default function App() {
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
               About the Project
             </h2>
-            <p className="text-zinc-300 leading-relaxed">
+            <p id='about' className="text-zinc-300 leading-relaxed">
               The VANT∆ Project is a unified space for experiments in full-stack web development,
               networking, security, and web utilities. I’m at the beginning of my
               full-stack development journey, building on a foundation in networking,
@@ -301,6 +307,21 @@ export default function App() {
           </div>
         </section>
 
+        <section className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 text-center">
+            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">Want Something Like This Built For You?</h2>
+            <p className="mt-3 text-zinc-300 max-w-3xl mx-auto leading-relaxed">
+              If you like any of these pages and want a custom version, reach out using the socials below or contact me via email on
+              the Suggestions and Feedback page.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a href="suggestions.html" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
+                Suggestions and Feedback
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="rounded-2xl border border-white/10 p-8 bg-white/[0.03]">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -309,14 +330,17 @@ export default function App() {
                 <p className="mt-2 text-zinc-400">If you have any questions or want to connect, feel free to reach out.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 [overflow-wrap:anywhere]">
+                <a href="https://www.instagram.com/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
                 <a href="https://discord.com/users/347416011928240128" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   Discord
                 </a>
-                <a href="https://github.com/v4nt4vo1d" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
                 <a href="mailto:v4nt4vo1d@gmail.com" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   Email
+                </a>
+                <a href="https://github.com/v4nt4vo1d" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
+                  GitHub
                 </a>
                 <a href="https://tryhackme.com/p/VANTA" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   TryHackMe

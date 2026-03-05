@@ -44,11 +44,19 @@ export const PROJECTS: Project[] = [
     category: 'Web',
   },
   {
+    title: 'Rocket League',
+    blurb: 'A website to showcase NRG (Not Really Good) Rocket League stats, built to explore API integration, and data visualization, while creating a useful tool for tracking personal and team in-game performance.',
+    tags: ['TypeScript', 'UI'],
+    href: '/micro-sites/random-5/app/public/index.html',
+    status: 'Beta',
+    category: 'Web',
+  },
+  {
     title: 'Settings Helper',
-    blurb: 'Coming soon – a browser-based utility that to centeralize settings accross various platforms, providing a unified interface for locating preferences and settings.',
+    blurb: 'Coming soon – a browser-based utility used to centralize settings across various platforms, providing a unified interface for locating preferences and settings.',
     tags: ['TypeScript', 'UI'],
     href: 'https://settinghelper.online',
-    status: 'Beta',
+    status: 'Concept',
     category: 'Web',
   },
   {

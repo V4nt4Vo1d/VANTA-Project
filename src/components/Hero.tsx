@@ -13,7 +13,7 @@ export function Hero() {
               transition={{ duration: 0.5 }}
               className="text-3xl sm:text-5xl font-black tracking-tight"
             >
-              THE VANT<span className="text-[color:var(--accent)]">∆</span> PROJECT
+              THE VANT<span className="text-[color:var(--accent3)]">∆</span> PROJECT
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 12 }}

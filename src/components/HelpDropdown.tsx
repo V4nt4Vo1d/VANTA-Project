@@ -46,7 +46,7 @@ export default function HelpDropdown() {
           <ul className="mt-3 space-y-2">
             <li>
               <a href="help.html" className="block text-sm text-zinc-200 hover:bg-white/5 rounded px-2 py-1">
-                Full help page
+                Full help & info page
               </a>
             </li>
             <li>
