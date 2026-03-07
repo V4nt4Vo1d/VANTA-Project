@@ -19,6 +19,25 @@ dotenv.config({ path: path.join(random5Root, ".env"), override: false });
 const app = express();
 app.use(express.json({ limit: "1mb" }));
 
+function normalizeIdentity(value) {
+  return (value || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function getTrackedIdentitiesFromTeam(team) {
+  const players = Array.isArray(team?.players) ? team.players : [];
+  const values = [];
+
+  for (const p of players) {
+    values.push(p?.name, p?.twitch, p?.tracker?.id);
+  }
+
+  return [...new Set(values.map(normalizeIdentity).filter(Boolean))];
+}
+
 function normalizeOriginValue(value) {
   return (value || "").toString().trim().toLowerCase().replace(/\/+$/, "");
 }
@@ -148,17 +167,29 @@ app.get("/api/twitch/live", async (req, res) => {
 app.get("/api/ballchasing/recent", async (req, res) => {
   try {
     let groupId = process.env.BALLCHASING_GROUP_ID || "";
+    let trackedIdentities = ["fahxey", "v4nt4vo1d"];
+
     if (!groupId) {
       try {
         const raw = fs.readFileSync(teamPath, "utf-8");
         const team = JSON.parse(raw);
         groupId = team?.ballchasing?.groupId || "";
+        const rosterIdentities = getTrackedIdentitiesFromTeam(team);
+        if (rosterIdentities.length) trackedIdentities = rosterIdentities;
+      } catch {}
+    } else {
+      try {
+        const raw = fs.readFileSync(teamPath, "utf-8");
+        const team = JSON.parse(raw);
+        const rosterIdentities = getTrackedIdentitiesFromTeam(team);
+        if (rosterIdentities.length) trackedIdentities = rosterIdentities;
       } catch {}
     }
 
     const payload = await getRecentReplays({
       groupId,
       count: 10,
+      trackedIdentities,
     });
 
     res.setHeader("Cache-Control", "no-store");

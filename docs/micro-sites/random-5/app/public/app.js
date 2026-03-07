@@ -91,6 +91,61 @@ async function fetchJson(url) {
 
 function safeText(s) { return (s ?? "").toString(); }
 
+function normalizeIdentity(value) {
+  return safeText(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function buildTrackedIdentitySet(team) {
+  const values = [];
+  const players = Array.isArray(team?.players) ? team.players : [];
+
+  for (const p of players) {
+    values.push(p?.name, p?.twitch, p?.tracker?.id);
+  }
+
+  // Keep an explicit fallback so this logic works even if roster data is partial.
+  values.push("fahxey", "v4nt4vo1d");
+
+  return new Set(values.map(normalizeIdentity).filter(Boolean));
+}
+
+function countTrackedPlayers(players, trackedIdentitySet) {
+  if (!Array.isArray(players) || !trackedIdentitySet || trackedIdentitySet.size === 0) return 0;
+
+  let count = 0;
+  for (const p of players) {
+    const id = normalizeIdentity(p?.name);
+    if (id && trackedIdentitySet.has(id)) count += 1;
+  }
+  return count;
+}
+
+function perspectiveResult(match, trackedIdentitySet) {
+  const blueGoals = match?.blueGoals;
+  const orangeGoals = match?.orangeGoals;
+  if (typeof blueGoals !== "number" || typeof orangeGoals !== "number") {
+    return match?.result || null;
+  }
+
+  const blueCount = countTrackedPlayers(match?.bluePlayers || [], trackedIdentitySet);
+  const orangeCount = countTrackedPlayers(match?.orangePlayers || [], trackedIdentitySet);
+
+  if (blueCount === orangeCount) {
+    return match?.result || null;
+  }
+
+  const trackedOnBlue = blueCount > orangeCount;
+  const trackedGoals = trackedOnBlue ? blueGoals : orangeGoals;
+  const opponentGoals = trackedOnBlue ? orangeGoals : blueGoals;
+
+  if (trackedGoals > opponentGoals) return "win";
+  if (trackedGoals < opponentGoals) return "loss";
+  return "draw";
+}
+
 function setApiStatus(kind, label, state = "") {
   const target = kind === "tracker" ? el("api-status-tracker") : el("api-status-ballchasing");
   if (!target) return;
@@ -287,7 +342,7 @@ function renderTeamPanel(name, goals, top, players = []) {
   `;
 }
 
-function renderMatches(payload) {
+function renderMatches(payload, trackedIdentitySet) {
   const grid = el("matches-grid");
   const empty = el("matches-empty");
   const source = el("matches-source");
@@ -314,8 +369,9 @@ function renderMatches(payload) {
       ? `${m.blueGoals}-${m.orangeGoals}`
       : "—";
 
-    const resultPill = m.result
-      ? `<span class="pill">${m.result.toUpperCase()}</span>`
+    const result = perspectiveResult(m, trackedIdentitySet);
+    const resultPill = result
+      ? `<span class="pill">${result.toUpperCase()}</span>`
       : "";
 
     const replayLink = m.url
@@ -460,11 +516,12 @@ if (logins.length) {
 
   try {
     const matches = await fetchJson(API.matches);
-    renderMatches(matches);
+    const trackedIdentitySet = buildTrackedIdentitySet(team);
+    renderMatches(matches, trackedIdentitySet);
     const hasItems = matches?.ok === true && Array.isArray(matches.items) && matches.items.length > 0;
     setApiStatus("ballchasing", hasItems ? `Ballchasing: live (${matches.items.length})` : "Ballchasing: no matches", hasItems ? "ok" : "warn");
   } catch (e) {
-    renderMatches({ ok: false, note: "Match endpoint unavailable." });
+    renderMatches({ ok: false, note: "Match endpoint unavailable." }, buildTrackedIdentitySet(team));
     setApiStatus("ballchasing", "Ballchasing: error", "err");
   }
 

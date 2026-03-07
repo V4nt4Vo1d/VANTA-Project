@@ -1,5 +1,59 @@
 const BC_BASE = "https://ballchasing.com/api";
 
+function normalizeIdentity(value) {
+  return (value || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function getPlayerIdentityCandidates(player) {
+  const names = [];
+  if (player?.name) names.push(player.name);
+
+  const idObj = player?.id;
+  if (idObj && typeof idObj === "object") {
+    if (idObj.id) names.push(idObj.id);
+    if (idObj.platform && idObj.id) names.push(`${idObj.platform}:${idObj.id}`);
+  }
+
+  if (player?.remote_id) names.push(player.remote_id);
+  if (player?.platform_id) names.push(player.platform_id);
+
+  return names
+    .map(normalizeIdentity)
+    .filter(Boolean);
+}
+
+function countTrackedPlayers(rawPlayers, trackedIdentitySet) {
+  if (!Array.isArray(rawPlayers) || trackedIdentitySet.size === 0) return 0;
+
+  let count = 0;
+  for (const player of rawPlayers) {
+    const candidates = getPlayerIdentityCandidates(player);
+    if (candidates.some((candidate) => trackedIdentitySet.has(candidate))) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
+
+function computePerspectiveResult({ blueGoals, orangeGoals, blueTrackedCount, orangeTrackedCount }) {
+  if (typeof blueGoals !== "number" || typeof orangeGoals !== "number") return null;
+
+  if (blueTrackedCount === orangeTrackedCount) return null;
+
+  const trackedSide = blueTrackedCount > orangeTrackedCount ? "blue" : "orange";
+  const trackedGoals = trackedSide === "blue" ? blueGoals : orangeGoals;
+  const opponentGoals = trackedSide === "blue" ? orangeGoals : blueGoals;
+
+  if (trackedGoals > opponentGoals) return "win";
+  if (trackedGoals < opponentGoals) return "loss";
+  return "draw";
+}
+
 function resolveKey() {
   const key = (
     process.env.BALLCHASING_API_KEY ||
@@ -64,8 +118,13 @@ function sortPlayers(players) {
   });
 }
 
-export async function getRecentReplays({ groupId, count = 10 }) {
+export async function getRecentReplays({ groupId, count = 10, trackedIdentities = [] }) {
   const key = resolveKey();
+  const trackedIdentitySet = new Set(
+    (Array.isArray(trackedIdentities) ? trackedIdentities : [])
+      .map(normalizeIdentity)
+      .filter(Boolean)
+  );
 
   const safeCount = Number.isFinite(count) ? Math.min(Math.max(Number(count), 1), 200) : 10;
 
@@ -102,8 +161,11 @@ export async function getRecentReplays({ groupId, count = 10 }) {
     const orange = r.orange || {};
     const date = r.date || null;
 
-    const bluePlayers = sortPlayers((blue.players || []).map(mapPlayer));
-    const orangePlayers = sortPlayers((orange.players || []).map(mapPlayer));
+    const blueRawPlayers = Array.isArray(blue.players) ? blue.players : [];
+    const orangeRawPlayers = Array.isArray(orange.players) ? orange.players : [];
+
+    const bluePlayers = sortPlayers(blueRawPlayers.map(mapPlayer));
+    const orangePlayers = sortPlayers(orangeRawPlayers.map(mapPlayer));
 
     const derivedBlueGoals = bluePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
     const derivedOrangeGoals = orangePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
@@ -111,10 +173,14 @@ export async function getRecentReplays({ groupId, count = 10 }) {
     const blueGoals = typeof blue.goals === "number" ? blue.goals : derivedBlueGoals;
     const orangeGoals = typeof orange.goals === "number" ? orange.goals : derivedOrangeGoals;
 
-    let result = null;
-    if (typeof blueGoals === "number" && typeof orangeGoals === "number") {
-      result = blueGoals > orangeGoals ? "win" : (blueGoals < orangeGoals ? "loss" : "draw");
-    }
+    const blueTrackedCount = countTrackedPlayers(blueRawPlayers, trackedIdentitySet);
+    const orangeTrackedCount = countTrackedPlayers(orangeRawPlayers, trackedIdentitySet);
+    const result = computePerspectiveResult({
+      blueGoals,
+      orangeGoals,
+      blueTrackedCount,
+      orangeTrackedCount,
+    });
 
     return {
       id: r.id,
@@ -135,6 +201,7 @@ export async function getRecentReplays({ groupId, count = 10 }) {
       blueGoals,
       orangeGoals,
       result,
+      trackedSide: blueTrackedCount === orangeTrackedCount ? null : (blueTrackedCount > orangeTrackedCount ? "blue" : "orange"),
     };
   });
 
