@@ -44,6 +44,14 @@ export const PROJECTS: Project[] = [
     category: 'Web',
   },
   {
+    title: 'Fahxey',
+    blurb: 'A website built for Fahxey – a Twitch streamer and content creator, designed to showcase their brand and content while showcasing examples of my skills in front-end development, UI design, and API integration.',
+    tags: ['TypeScript', 'UI'],
+    href: 'https://fahxey.com',
+    status: 'Beta',
+    category: 'Web',
+  },
+  {
     title: 'Rocket League',
     blurb: 'A website to showcase NRG (Not Really Good) Rocket League stats, built to explore API integration, and data visualization, while creating a useful tool for tracking personal and team in-game performance.',
     tags: ['TypeScript', 'UI'],
@@ -70,14 +78,6 @@ export const PROJECTS: Project[] = [
   {
     title: 'Network Monitor',
     blurb: 'Coming soon – a web application that will render graphical views of local network activity, show connected devices and traffic stats in real‑time, and serve as a learning exercise in React, TypeScript, and websockets.',
-    tags: ['React', 'TypeScript'],
-    href: '/under-construction.html',
-    status: 'Coming Soon',
-    category: 'Web',
-  },
-  {
-    title: 'Todo App',
-    blurb: 'Coming soon – a minimalist task manager built with drag‑and‑drop support and local storage, designed to be used as a file storage server along with a task organizer.',
     tags: ['React', 'TypeScript'],
     href: '/under-construction.html',
     status: 'Coming Soon',
