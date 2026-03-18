@@ -1,41 +1,57 @@
 const BC_BASE = "https://ballchasing.com/api";
 
-function normalizeText(value) {
-  return (value || "").toString().trim().toLowerCase();
+function normalizeIdentity(value) {
+  return (value || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 }
 
-function playerMatchesAlias(player, aliases) {
-  if (!player || !(aliases instanceof Set) || aliases.size === 0) return false;
+function getPlayerIdentityCandidates(player) {
+  const names = [];
+  if (player?.name) names.push(player.name);
 
-  const candidateValues = [];
+  const idObj = player?.id;
+  if (idObj && typeof idObj === "object") {
+    if (idObj.id) names.push(idObj.id);
+    if (idObj.platform && idObj.id) names.push(`${idObj.platform}:${idObj.id}`);
+  }
 
-  if (player.name) candidateValues.push(player.name);
+  if (player?.remote_id) names.push(player.remote_id);
+  if (player?.platform_id) names.push(player.platform_id);
 
-  if (player.id && typeof player.id === "object") {
-    for (const value of Object.values(player.id)) {
-      if (typeof value === "string" || typeof value === "number") {
-        candidateValues.push(value);
-      }
+  return names
+    .map(normalizeIdentity)
+    .filter(Boolean);
+}
+
+function countTrackedPlayers(rawPlayers, trackedIdentitySet) {
+  if (!Array.isArray(rawPlayers) || trackedIdentitySet.size === 0) return 0;
+
+  let count = 0;
+  for (const player of rawPlayers) {
+    const candidates = getPlayerIdentityCandidates(player);
+    if (candidates.some((candidate) => trackedIdentitySet.has(candidate))) {
+      count += 1;
     }
   }
 
-  for (const value of candidateValues) {
-    const normalized = normalizeText(value);
-    if (normalized && aliases.has(normalized)) return true;
-  }
-
-  return false;
+  return count;
 }
 
-function resolveTeamSideByAliases(bluePlayers, orangePlayers, aliases) {
-  if (!(aliases instanceof Set) || aliases.size === 0) return null;
+function computePerspectiveResult({ blueGoals, orangeGoals, blueTrackedCount, orangeTrackedCount }) {
+  if (typeof blueGoals !== "number" || typeof orangeGoals !== "number") return null;
 
-  const inBlue = (bluePlayers || []).some((p) => playerMatchesAlias(p, aliases));
-  const inOrange = (orangePlayers || []).some((p) => playerMatchesAlias(p, aliases));
+  if (blueTrackedCount === orangeTrackedCount) return null;
 
-  if (inBlue && !inOrange) return "blue";
-  if (inOrange && !inBlue) return "orange";
-  return null;
+  const trackedSide = blueTrackedCount > orangeTrackedCount ? "blue" : "orange";
+  const trackedGoals = trackedSide === "blue" ? blueGoals : orangeGoals;
+  const opponentGoals = trackedSide === "blue" ? orangeGoals : blueGoals;
+
+  if (trackedGoals > opponentGoals) return "win";
+  if (trackedGoals < opponentGoals) return "loss";
+  return "draw";
 }
 
 function resolveKey() {
@@ -102,12 +118,11 @@ function sortPlayers(players) {
   });
 }
 
-export async function getRecentReplays({ groupId, count = 10, focusPlayerAliases = [] }) {
+export async function getRecentReplays({ groupId, count = 10, trackedIdentities = [] }) {
   const key = resolveKey();
-
-  const aliasSet = new Set(
-    (Array.isArray(focusPlayerAliases) ? focusPlayerAliases : [])
-      .map((x) => normalizeText(x))
+  const trackedIdentitySet = new Set(
+    (Array.isArray(trackedIdentities) ? trackedIdentities : [])
+      .map(normalizeIdentity)
       .filter(Boolean)
   );
 
@@ -146,11 +161,11 @@ export async function getRecentReplays({ groupId, count = 10, focusPlayerAliases
     const orange = r.orange || {};
     const date = r.date || null;
 
-    const rawBluePlayers = Array.isArray(blue.players) ? blue.players : [];
-    const rawOrangePlayers = Array.isArray(orange.players) ? orange.players : [];
+    const blueRawPlayers = Array.isArray(blue.players) ? blue.players : [];
+    const orangeRawPlayers = Array.isArray(orange.players) ? orange.players : [];
 
-    const bluePlayers = sortPlayers(rawBluePlayers.map(mapPlayer));
-    const orangePlayers = sortPlayers(rawOrangePlayers.map(mapPlayer));
+    const bluePlayers = sortPlayers(blueRawPlayers.map(mapPlayer));
+    const orangePlayers = sortPlayers(orangeRawPlayers.map(mapPlayer));
 
     const derivedBlueGoals = bluePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
     const derivedOrangeGoals = orangePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
@@ -158,19 +173,14 @@ export async function getRecentReplays({ groupId, count = 10, focusPlayerAliases
     const blueGoals = typeof blue.goals === "number" ? blue.goals : derivedBlueGoals;
     const orangeGoals = typeof orange.goals === "number" ? orange.goals : derivedOrangeGoals;
 
-    let winnerSide = null;
-    if (typeof blueGoals === "number" && typeof orangeGoals === "number") {
-      winnerSide = blueGoals > orangeGoals ? "blue" : (blueGoals < orangeGoals ? "orange" : "draw");
-    }
-
-    const myTeamSide = resolveTeamSideByAliases(rawBluePlayers, rawOrangePlayers, aliasSet);
-
-    let result = null;
-    if (winnerSide === "draw") {
-      result = "draw";
-    } else if (myTeamSide && winnerSide) {
-      result = myTeamSide === winnerSide ? "win" : "loss";
-    }
+    const blueTrackedCount = countTrackedPlayers(blueRawPlayers, trackedIdentitySet);
+    const orangeTrackedCount = countTrackedPlayers(orangeRawPlayers, trackedIdentitySet);
+    const result = computePerspectiveResult({
+      blueGoals,
+      orangeGoals,
+      blueTrackedCount,
+      orangeTrackedCount,
+    });
 
     return {
       id: r.id,
@@ -191,7 +201,7 @@ export async function getRecentReplays({ groupId, count = 10, focusPlayerAliases
       blueGoals,
       orangeGoals,
       result,
-      myTeamSide,
+      trackedSide: blueTrackedCount === orangeTrackedCount ? null : (blueTrackedCount > orangeTrackedCount ? "blue" : "orange"),
     };
   });
 
