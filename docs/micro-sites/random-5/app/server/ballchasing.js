@@ -1,5 +1,43 @@
 const BC_BASE = "https://ballchasing.com/api";
 
+function normalizeText(value) {
+  return (value || "").toString().trim().toLowerCase();
+}
+
+function playerMatchesAlias(player, aliases) {
+  if (!player || !(aliases instanceof Set) || aliases.size === 0) return false;
+
+  const candidateValues = [];
+
+  if (player.name) candidateValues.push(player.name);
+
+  if (player.id && typeof player.id === "object") {
+    for (const value of Object.values(player.id)) {
+      if (typeof value === "string" || typeof value === "number") {
+        candidateValues.push(value);
+      }
+    }
+  }
+
+  for (const value of candidateValues) {
+    const normalized = normalizeText(value);
+    if (normalized && aliases.has(normalized)) return true;
+  }
+
+  return false;
+}
+
+function resolveTeamSideByAliases(bluePlayers, orangePlayers, aliases) {
+  if (!(aliases instanceof Set) || aliases.size === 0) return null;
+
+  const inBlue = (bluePlayers || []).some((p) => playerMatchesAlias(p, aliases));
+  const inOrange = (orangePlayers || []).some((p) => playerMatchesAlias(p, aliases));
+
+  if (inBlue && !inOrange) return "blue";
+  if (inOrange && !inBlue) return "orange";
+  return null;
+}
+
 function resolveKey() {
   const key = (
     process.env.BALLCHASING_API_KEY ||
@@ -64,8 +102,14 @@ function sortPlayers(players) {
   });
 }
 
-export async function getRecentReplays({ groupId, count = 10 }) {
+export async function getRecentReplays({ groupId, count = 10, focusPlayerAliases = [] }) {
   const key = resolveKey();
+
+  const aliasSet = new Set(
+    (Array.isArray(focusPlayerAliases) ? focusPlayerAliases : [])
+      .map((x) => normalizeText(x))
+      .filter(Boolean)
+  );
 
   const safeCount = Number.isFinite(count) ? Math.min(Math.max(Number(count), 1), 200) : 10;
 
@@ -102,8 +146,11 @@ export async function getRecentReplays({ groupId, count = 10 }) {
     const orange = r.orange || {};
     const date = r.date || null;
 
-    const bluePlayers = sortPlayers((blue.players || []).map(mapPlayer));
-    const orangePlayers = sortPlayers((orange.players || []).map(mapPlayer));
+    const rawBluePlayers = Array.isArray(blue.players) ? blue.players : [];
+    const rawOrangePlayers = Array.isArray(orange.players) ? orange.players : [];
+
+    const bluePlayers = sortPlayers(rawBluePlayers.map(mapPlayer));
+    const orangePlayers = sortPlayers(rawOrangePlayers.map(mapPlayer));
 
     const derivedBlueGoals = bluePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
     const derivedOrangeGoals = orangePlayers.reduce((sum, p) => sum + (Number.isFinite(p.goals) ? p.goals : 0), 0);
@@ -111,9 +158,18 @@ export async function getRecentReplays({ groupId, count = 10 }) {
     const blueGoals = typeof blue.goals === "number" ? blue.goals : derivedBlueGoals;
     const orangeGoals = typeof orange.goals === "number" ? orange.goals : derivedOrangeGoals;
 
-    let result = null;
+    let winnerSide = null;
     if (typeof blueGoals === "number" && typeof orangeGoals === "number") {
-      result = blueGoals > orangeGoals ? "win" : (blueGoals < orangeGoals ? "loss" : "draw");
+      winnerSide = blueGoals > orangeGoals ? "blue" : (blueGoals < orangeGoals ? "orange" : "draw");
+    }
+
+    const myTeamSide = resolveTeamSideByAliases(rawBluePlayers, rawOrangePlayers, aliasSet);
+
+    let result = null;
+    if (winnerSide === "draw") {
+      result = "draw";
+    } else if (myTeamSide && winnerSide) {
+      result = myTeamSide === winnerSide ? "win" : "loss";
     }
 
     return {
@@ -135,6 +191,7 @@ export async function getRecentReplays({ groupId, count = 10 }) {
       blueGoals,
       orangeGoals,
       result,
+      myTeamSide,
     };
   });
 

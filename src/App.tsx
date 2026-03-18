@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { DeltaBackdrop } from './components/DeltaBackdrop'
 import { Hero } from './components/Hero'
 import { ProjectCard } from './components/ProjectCard'
-import { CATEGORIES, LOGO_SRC, type Category } from './data/constants'
+import { CATEGORIES, NAV, LOGO_SRC, type Category } from './data/constants'
 import { PROJECTS } from './data/projects'
 import DiscordStatus from "./components/DiscordStatus";
 import { supabase } from "./supabaseClient";
@@ -195,6 +195,16 @@ export default function App() {
         >
           <div className="px-4 pb-4 pt-2 border-t border-white/10 bg-black/60 backdrop-blur supports-[backdrop-filter]:bg-black/40">
             <div className="flex flex-col gap-2">
+              {NAV.map((n) => (
+                <a
+                  key={n.id}
+                  href={`#${n.id}`}
+                  className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {n.label}
+                </a>
+              ))}
               <a
                 href="https://github.com/v4nt4vo1d"
                 className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
@@ -207,21 +217,12 @@ export default function App() {
               <a
               href="streams.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
-              onClick={() => setMenuOpen(false)}
             >
               Streams
             </a>
               <a
-              href="#about"
-              className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
-              onClick={() => setMenuOpen(false)}
-            >
-              About
-            </a>
-              <a
               href="help.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
-              onClick={() => setMenuOpen(false)}
             >
               Help
             </a>
@@ -229,7 +230,6 @@ export default function App() {
               <a
               href="suggestions.html"
               className="rounded-xl border border-white/10 px-3 py-1.5 text-sm hover:border-white/20"
-              onClick={() => setMenuOpen(false)}
             >
               Suggestions
             </a>

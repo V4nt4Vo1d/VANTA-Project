@@ -148,17 +148,42 @@ app.get("/api/twitch/live", async (req, res) => {
 app.get("/api/ballchasing/recent", async (req, res) => {
   try {
     let groupId = process.env.BALLCHASING_GROUP_ID || "";
-    if (!groupId) {
-      try {
-        const raw = fs.readFileSync(teamPath, "utf-8");
-        const team = JSON.parse(raw);
+    let focusPlayerAliases = [];
+    let team = null;
+
+    const envAliases = (process.env.BALLCHASING_FOCUS_PLAYER || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    if (envAliases.length) {
+      focusPlayerAliases = envAliases;
+    }
+
+    try {
+      const raw = fs.readFileSync(teamPath, "utf-8");
+      team = JSON.parse(raw);
+    } catch {}
+
+    if (!groupId && team) {
         groupId = team?.ballchasing?.groupId || "";
-      } catch {}
+    }
+
+    if (!focusPlayerAliases.length && team) {
+      const primaryPlayer = Array.isArray(team?.players) ? team.players[0] : null;
+      const aliases = [
+        primaryPlayer?.name,
+        primaryPlayer?.tracker?.id,
+        primaryPlayer?.twitch,
+      ].filter(Boolean);
+
+      focusPlayerAliases = aliases;
     }
 
     const payload = await getRecentReplays({
       groupId,
       count: 10,
+      focusPlayerAliases,
     });
 
     res.setHeader("Cache-Control", "no-store");
