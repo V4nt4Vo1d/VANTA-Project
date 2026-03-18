@@ -31,7 +31,7 @@ export function Hero() {
               className="mt-8 flex items-center gap-3"
             >
               <a
-                href="./micro-sites/Homepage/index.html"
+                href="https://projects.vantaproject.space"
                 className="rounded-xl bg-[color:var(--accent)]/10 border border-[color:var(--accent)]/40 px-4 py-2 text-sm hover:bg-[color:var(--accent)]/20"
               >
                 Explore Projects
