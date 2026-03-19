@@ -54,10 +54,18 @@ export const PROJECTS: Project[] = [
   {
     title: 'Rocket League',
     blurb: 'A website to showcase NRG (Not Really Good) Rocket League stats, built to explore API integration, and data visualization, while creating a useful tool for tracking personal and team in-game performance.',
-    tags: ['TypeScript', 'UI'],
+    tags: ['API', 'TypeScript', 'UI'],
     href: 'https://rl.vantaproject.space',
     status: 'Beta',
     category: 'Web',
+  },
+  {
+    title: 'Log Analyzer',
+    blurb: 'A web application that analyzes and visualizes log data, providing insights and trends for better decision-making.',
+    tags: ['HTML', 'Tailwind', 'TypeScript'],
+    href: 'https://logs.vantaproject.space',
+    status: 'Beta',
+    category: 'Applications',
   },
   {
     title: 'Settings Helper',
@@ -66,14 +74,6 @@ export const PROJECTS: Project[] = [
     href: 'https://settings.vantaproject.space',
     status: 'Concept',
     category: 'Web',
-  },
-  {
-    title: 'Weather Widget',
-    blurb: 'Coming soon – a lightweight, minimalist display intended for digital signage or dashboard use, fetching live weather data and presenting current conditions alongside a clean, responsive layout to illustrate real‑time API integration.',
-    tags: ['API', 'CSS'],
-    href: '/under-construction.html',
-    status: 'Coming Soon',
-    category: 'Applications',
   },
   {
     title: 'Network Monitor',
