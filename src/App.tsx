@@ -352,12 +352,12 @@ export default function App() {
                 <a href="https://www.youtube.com/@VANTAxxTV" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   YouTube
                 </a>
-                <a
+                {/* <a
                   href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"
                   target="_blank" rel="noopener noreferrer">
                   LinkedIn
-                </a>
+                </a> */}
                 {/* <a
                 href={`${import.meta.env.BASE_URL}resume.html`}
                 className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
