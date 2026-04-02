@@ -316,7 +316,7 @@ export default function App() {
               the Suggestions and Feedback page.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <a href="suggestions.html" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20">
+              <a href="suggestions.html" className=" rounded-xl border border-white/10 px-4 py-2 text-[var(--accent)] hover:border-white/20">
                 Suggestions and Feedback
               </a>
             </div>
