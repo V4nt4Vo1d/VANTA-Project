@@ -12,10 +12,6 @@ on:
       - 'tailwind.config.js'
       - 'postcss.config.js'
       - 'tsconfig*.json'
-    # docs/** is intentionally excluded so auto-rebuild commits don't re-trigger
-    # this workflow (changes to docs/ alone will not match the paths above).
-
-  # Allow running manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -30,7 +26,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          # Fetch full history so git push works correctly
           fetch-depth: 0
 
       - name: Setup Node.js
