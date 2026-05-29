@@ -331,9 +331,9 @@ export default function App() {
                 <p className="mt-2 text-zinc-400">If you have any questions or want to connect, feel free to reach out.</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 [overflow-wrap:anywhere]">
-                <a href="https://www.instagram.com/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
-                  Instagram
-                </a>
+                {/* <a href="https://www.instagram.com/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer"> */}
+                  {/* Instagram */}
+                {/* </a> */}
                 <a href="https://discord.com/users/347416011928240128" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   Discord
                 </a>
@@ -346,12 +346,12 @@ export default function App() {
                 <a href="https://tryhackme.com/p/VANTA" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
                   TryHackMe
                 </a>
-                <a href="https://www.twitch.tv/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
-                  Twitch
-                </a>
-                <a href="https://www.youtube.com/@VANTAxxTV" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer">
-                  YouTube
-                </a>
+                {/* <a href="https://www.twitch.tv/vantaxxtv" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer"> */}
+                  {/* Twitch */}
+                {/* </a> */}
+                {/* <a href="https://www.youtube.com/@VANTAxxTV" className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20" target="_blank" rel="noopener noreferrer"> */}
+                  {/* YouTube */}
+                {/* </a> */}
                 {/* <a
                   href="https://www.linkedin.com/in/jacob-r-2228a8206?trk=people-guest_people_search-card"
                   className="rounded-xl border border-white/10 px-4 py-2 hover:border-white/20"

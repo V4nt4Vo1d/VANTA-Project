@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     blurb: 'A website built for Fahxey – a Twitch streamer and content creator, designed to showcase their brand and content while showcasing examples of my skills in front-end development, UI design, and API integration.',
     tags: ['TypeScript', 'UI'],
     href: 'https://fahxey.com',
-    status: 'Beta',
+    status: 'Live',
     category: 'Web',
   },
   {
